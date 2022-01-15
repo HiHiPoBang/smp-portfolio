@@ -1,7 +1,7 @@
 import { getPostBySlug, getAllPosts } from '../../lib/api';
 import mdxToMdxSource from '../../lib/mdxToMdxSource';
-import { MDXRemote } from 'next-mdx-remote'
-import type { NextPage } from 'next'
+import { MDXRemote } from 'next-mdx-remote';
+import type { NextPage } from 'next';
 import Layout from '../../components/Layout';
 
 const Post: NextPage = ({ mdxSource }: any) => {
@@ -9,23 +9,23 @@ const Post: NextPage = ({ mdxSource }: any) => {
     <Layout>
       <MDXRemote {...mdxSource} />
     </Layout>
-  )
+  );
 };
 type Params = {
   params: {
-      slug: string
-  }
-}
+    slug: string;
+  };
+};
 export const getStaticProps = async ({ params: { slug } }: Params) => {
-  const markdownWithMeta = getPostBySlug(slug, []);
-  const {frontMatter, mdxSource} = await mdxToMdxSource(markdownWithMeta);
+  const markdownWithMeta = getPostBySlug(slug);
+  const { frontMatter, mdxSource } = await mdxToMdxSource(markdownWithMeta);
   return {
     props: {
       frontMatter,
       slug,
-      mdxSource
-    }
-  }
+      mdxSource,
+    },
+  };
 };
 export const getStaticPaths = () => {
   const posts = getAllPosts();
@@ -33,12 +33,12 @@ export const getStaticPaths = () => {
     return {
       params: {
         slug: post.slug,
-      }
-    }
+      },
+    };
   });
   return {
     paths,
-    fallback: false
-  }
+    fallback: false,
+  };
 };
 export default Post;

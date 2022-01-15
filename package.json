@@ -6,6 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "prettier": "prettier '**/*.{js,jsx,ts,tsx}' --write",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -21,11 +22,14 @@
     "@commitlint/config-conventional": "^16.0.0",
     "@types/node": "17.0.8",
     "@types/react": "17.0.38",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
     "babel-plugin-styled-components": "^2.0.2",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.7",
+    "eslint-config-prettier": "^8.3.0",
     "husky": "^7.0.0",
     "next-mdx-remote": "^3.0.8",
+    "prettier": "^2.5.1",
     "typescript": "4.5.4"
   }
 }

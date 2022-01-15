@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import Link from 'next/link';
 
 const Navigation = styled.nav`
@@ -6,7 +6,7 @@ const Navigation = styled.nav`
   justify-content: flex-end;
   width: 100vw;
   padding: 1rem;
-  background: #FFFFFF;
+  background: #ffffff;
 `;
 const LinkText = styled.span`
   padding: 0 1rem;
@@ -18,13 +18,19 @@ const Header = () => (
   <header>
     <Navigation>
       <Link href="/">
-        <a><LinkText>Home</LinkText></a>
+        <a>
+          <LinkText>Home</LinkText>
+        </a>
       </Link>
       <Link href="/about">
-        <a><LinkText>About</LinkText></a>
+        <a>
+          <LinkText>About</LinkText>
+        </a>
       </Link>
       <Link href="/blog">
-        <a><LinkText>Blog</LinkText></a>
+        <a>
+          <LinkText>Blog</LinkText>
+        </a>
       </Link>
     </Navigation>
   </header>

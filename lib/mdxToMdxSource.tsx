@@ -1,5 +1,5 @@
 import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize'
+import { serialize } from 'next-mdx-remote/serialize';
 
 const mdxToMdxSource = async (mdx: any) => {
   const { data: frontMatter, content } = matter(mdx);
@@ -7,7 +7,7 @@ const mdxToMdxSource = async (mdx: any) => {
   return {
     frontMatter,
     mdxSource,
-  }
+  };
 };
 
 export default mdxToMdxSource;
