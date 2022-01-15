@@ -8,7 +8,7 @@ const Navigation = styled.nav`
   padding: 1rem;
   background: #FFFFFF;
 `;
-const PageLink = styled.a`
+const LinkText = styled.span`
   padding: 0 1rem;
   font-size: 1.25rem;
   color: #000000;
@@ -18,13 +18,13 @@ const Header = () => (
   <header>
     <Navigation>
       <Link href="/">
-        <PageLink>Home</PageLink>
+        <a><LinkText>Home</LinkText></a>
       </Link>
       <Link href="/about">
-        <PageLink>About</PageLink>
+        <a><LinkText>About</LinkText></a>
       </Link>
       <Link href="/blog">
-        <PageLink>Blog</PageLink>
+        <a><LinkText>Blog</LinkText></a>
       </Link>
     </Navigation>
   </header>
