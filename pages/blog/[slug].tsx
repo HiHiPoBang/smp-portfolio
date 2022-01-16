@@ -2,20 +2,29 @@ import { getPostBySlug, getAllPosts } from '../../lib/api';
 import mdxToMdxSource from '../../lib/mdxToMdxSource';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import type { NextPage } from 'next';
-import Layout from '../../components/Layout';
+import { Layout, H1, BlogBanner } from '../../components';
 
 type Props = {
-  mdxSource: MDXRemoteSerializeResult,
-}
+  mdxSource: MDXRemoteSerializeResult;
+  slug: string;
+};
 type Params = {
   params: {
     slug: string;
   };
 };
-const Post: NextPage<Props> = ({ mdxSource }: Props) => {
+const Post: NextPage<Props> = ({ mdxSource, slug }: Props) => {
   return (
     <Layout>
-      <MDXRemote {...mdxSource} />
+      <main className="my-4 flex flex-col items-center">
+        <div className="md:w-full max-w-screen-lg">
+          <H1>{slug}</H1>
+          <BlogBanner src={`/assets/blog/highcharts-component-library/highcharts-component-library.jpeg`} />
+          <article className="my-4">
+            <MDXRemote {...mdxSource} />
+          </article>
+        </div>
+      </main>
     </Layout>
   );
 };

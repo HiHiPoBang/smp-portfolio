@@ -1,11 +1,11 @@
-import type { NextPage, GetStaticProps } from 'next'
+import type { NextPage, GetStaticProps } from 'next';
 import { getAllPosts } from '../../lib/api';
-import { IPost } from "../../types/post";
+import { IPost } from '../../types/post';
 import Link from 'next/link';
 import { Layout } from '../../components';
 
 type Props = {
-  posts: IPost[],
+  posts: IPost[];
 };
 const Blog: NextPage<Props> = ({ posts }: Props) => {
   return (

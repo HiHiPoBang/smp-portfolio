@@ -1,30 +1,18 @@
 import styled from 'styled-components';
-import NextImage from 'next/image'
-import type { ImageProps } from 'next/image'
-
-
-type Props = {
-  width: string | number | null | undefined,
-};
+import NextImage from 'next/image';
+import type { ImageProps } from 'next/image';
 
 const ImageContainer = styled.div`
   position: relative;
-  width: ${({width}: Props) => width || 'auto'};
-  max-width: 1240px;
-  height: 370px;
-`
+  margin-top: 1rem;
+  width: 100%;
+  height: 250px;
+`;
 
-const Image = ({width, alt, ...otherProps}: ImageProps) => (
-  <ImageContainer width={width}>
-    <NextImage
-      alt={alt}
-      layout="fill"
-      width="100%"
-      height="100%"
-      objectFit="cover"
-      {...otherProps}
-    />
+const Image = ({ alt, ...otherProps }: ImageProps) => (
+  <ImageContainer>
+    <NextImage alt={alt} layout="fill" width="100%" height="100%" objectFit="cover" {...otherProps} />
   </ImageContainer>
-)
+);
 
 export default Image;
