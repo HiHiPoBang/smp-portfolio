@@ -1,12 +1,16 @@
+import type { NextPage, GetStaticProps } from 'next'
 import { getAllPosts } from '../../lib/api';
-import type { NextPage } from 'next';
+import { IPost } from "../../types/post";
 import Link from 'next/link';
-import Layout from '../../components/Layout';
+import { Layout } from '../../components';
 
-const Blog: NextPage = ({ posts }: any) => {
+type Props = {
+  posts: IPost[],
+};
+const Blog: NextPage<Props> = ({ posts }: Props) => {
   return (
     <Layout>
-      {posts.map((post: any) => (
+      {posts.map((post) => (
         <Link href={'/blog/' + post.slug} passHref key={post.slug}>
           <a>
             {post.slug} <br></br>
@@ -16,7 +20,7 @@ const Blog: NextPage = ({ posts }: any) => {
     </Layout>
   );
 };
-export const getStaticProps = () => {
+export const getStaticProps: GetStaticProps = () => {
   const posts = getAllPosts();
   return {
     props: {

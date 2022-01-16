@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 
 const postsDirectory = path.join('_posts');
 
-export const getPostBySlug = (slug: string, fields = []) => {
+export const getPostBySlug = (slug: string /*fields = []*/) => {
   return fs.readFileSync(path.join('_posts', `${slug}.mdx`), 'utf-8');
 };
 
