@@ -7,7 +7,7 @@ export const BORDER_LIGHT_COLOR = '#DCDFE6';
 
 export const PRIMARY_FONT_SIZE = '1rem';
 export const REGULAR_FONT_SIZE = '0.875rem';
-export const H1_FONT_SIZE = '1.875rem';
+export const H1_FONT_SIZE = '2.5rem';
 export const H2_FONT_SIZE = '1.75rem';
 export const H3_FONT_SIZE = '1.5rem';
 export const H4_FONT_SIZE = '1.375rem';

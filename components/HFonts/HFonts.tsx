@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import { PRIMARY_FONT_COLOR, H1_FONT_SIZE, H2_FONT_SIZE } from '../stylesConfig';
 
 const H1 = styled.h1`
+  margin: 1rem 0;
   width: 100%;
   font-size: ${H1_FONT_SIZE};
+  font-weight: 300;
   color: ${PRIMARY_FONT_COLOR};
 `;
 
