@@ -14,7 +14,7 @@ const Layout = ({ children, title = 'Welcome to Iris Blog' }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Header />
-    {children}
+    <main className="mt-20">{children}</main>
     <footer></footer>
   </>
 );

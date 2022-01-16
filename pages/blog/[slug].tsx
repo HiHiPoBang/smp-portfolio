@@ -2,7 +2,7 @@ import { getPostBySlug, getAllPosts } from '../../lib/api';
 import mdxToMdxSource from '../../lib/mdxToMdxSource';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import type { NextPage } from 'next';
-import { Layout, H1, BlogBanner } from '../../components';
+import { Layout, H1, BlogBanner, MarkdownWrapper } from '../../components';
 
 type Props = {
   mdxSource: MDXRemoteSerializeResult;
@@ -16,15 +16,15 @@ type Params = {
 const Post: NextPage<Props> = ({ mdxSource, slug }: Props) => {
   return (
     <Layout>
-      <main className="my-4 flex flex-col items-center">
+      <div className="my-4 flex flex-col items-center">
         <div className="md:w-full max-w-screen-lg">
           <H1>{slug}</H1>
           <BlogBanner src={`/assets/blog/highcharts-component-library/highcharts-component-library.jpeg`} />
-          <article className="my-4">
+          <MarkdownWrapper>
             <MDXRemote {...mdxSource} />
-          </article>
+          </MarkdownWrapper>
         </div>
-      </main>
+      </div>
     </Layout>
   );
 };
