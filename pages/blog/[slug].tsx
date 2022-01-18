@@ -2,16 +2,15 @@ import { getPostBySlug, getAllPosts, getPrevAndNextPostBySlug } from '../../lib/
 import mdxToMdxSource from '../../lib/mdxToMdxSource';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import type { NextPage } from 'next';
-import Link from 'next/link';
-import { Layout, H1, BlogBanner, MarkdownWrapper } from '../../components';
-import next from 'next';
+import { Layout, H1, BlogBanner, MarkdownWrapper, SiteLink } from '../../components';
+import { IPostMeta, IPost } from '../../types/post';
 
 type PostType = {
-  metaData: any;
+  metaData: IPostMeta;
   slug: string;
 };
 type Props = {
-  metaData: any;
+  metaData: IPostMeta;
   mdxSource: MDXRemoteSerializeResult;
   slug: string;
   prevPost: PostType;
@@ -23,28 +22,34 @@ type Params = {
   };
 };
 const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Props) => {
-  const renderPostLink = (post: any) => {
-    return post.slug ? (
-      <div>
-        <Link href={post.slug}>
-          <a>{post.metaData.title}</a>
-        </Link>
-      </div>
-    ) : null;
+  const renderBlogBanner = (metaData: IPostMeta) => {
+    return metaData.thumbnailUrl ? <BlogBanner src={metaData.thumbnailUrl} /> : null;
+  };
+  const renderPostLink = (post: IPost, isNextPost: boolean) => {
+    if (!post.slug) {
+      return null;
+    }
+    const text = isNextPost ? `${post.metaData.title}` : `${post.metaData.title}`;
+    const alignClass = isNextPost ? 'float-right' : 'float-left';
+    return (
+      <SiteLink herf={post.slug}>
+        <span className={`top ${alignClass}`}>{text}</span>
+      </SiteLink>
+    );
   };
   return (
     <Layout>
       <div className="my-4 flex flex-col items-center">
         <div className="md:w-full max-w-screen-lg">
           <H1>{metaData.title}</H1>
-          <BlogBanner src={metaData.thumbnailUrl} />
+          {renderBlogBanner(metaData)}
           <MarkdownWrapper>
             <MDXRemote {...mdxSource} />
           </MarkdownWrapper>
         </div>
-        <div>
-          {renderPostLink(prevPost)}
-          {renderPostLink(nextPost)}
+        <div className="grid justify-between grid-cols-2 md:w-full max-w-screen-lg">
+          {renderPostLink(prevPost, false)}
+          {renderPostLink(nextPost, true)}
         </div>
       </div>
     </Layout>

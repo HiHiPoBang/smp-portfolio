@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import Link from 'next/link';
-import { H6_FONT_SIZE, PRIMARY_FONT_COLOR, SECONDARY_FONT_COLOR } from './stylesConfig';
+import SiteLink from './SiteLink';
 
 const Navigation = styled.nav`
   z-index: 1;
@@ -10,38 +9,16 @@ const Navigation = styled.nav`
   display: flex;
   justify-content: flex-end;
   width: 100vw;
-  padding: 1rem;
+  padding: 1rem 2rem;
   background: #ffffff;
   border: 1px solid #ddd;
 `;
-const LinkText = styled.span`
-  padding: 0 1rem;
-  font-size: ${H6_FONT_SIZE};
-  color: ${SECONDARY_FONT_COLOR};
-  cursor: pointer;
-  transition: color 0.3s;
-  &:hover {
-    color: ${PRIMARY_FONT_COLOR};
-  }
-`;
 const Header = () => (
   <header>
-    <Navigation>
-      <Link href="/">
-        <a>
-          <LinkText>Home</LinkText>
-        </a>
-      </Link>
-      <Link href="/about">
-        <a>
-          <LinkText>About</LinkText>
-        </a>
-      </Link>
-      <Link href="/blog">
-        <a>
-          <LinkText>Blog</LinkText>
-        </a>
-      </Link>
+    <Navigation className="flex justify-end gap-4">
+      <SiteLink herf="/">Home</SiteLink>
+      <SiteLink herf="/about">About</SiteLink>
+      <SiteLink herf="/blog">Blog</SiteLink>
     </Navigation>
   </header>
 );

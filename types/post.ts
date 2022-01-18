@@ -1,9 +1,11 @@
+export interface IPostMeta {
+  title: string;
+  date: string;
+  thumbnailUrl: string;
+  description?: string;
+  tags?: string[];
+}
 export interface IPost {
   slug: string;
-  date: string;
-  thumbnail: string;
-  title: string;
-  description: string;
-  prerequisites: string[];
-  stacks: string[];
+  metaData: IPostMeta;
 }
