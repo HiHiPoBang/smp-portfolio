@@ -34,22 +34,22 @@ export const getPrevAndNextPostBySlug = (slug: string) => {
   };
 };
 type TypeGetPost = {
-  page: number,
-  size: 10
-}
-export const getPosts = ({page = 1, size = 10}: TypeGetPost) => {
+  page: number;
+  size: 10;
+};
+export const getPosts = ({ page = 1, size = 10 }: TypeGetPost) => {
   const files = fs.readdirSync(postsDirectory);
   const total = files.length;
   const start = (page - 1) * size;
   const end = start + size;
   const posts = files
     .map((fileName) => getPostBySlug(fileName.split('.')[0]))
-    .sort((post1, post2) => post1.metaData.date > post2.metaData.date ? -1 : 1)
-    .filter((_, index) => (index >= start && index < end));
+    .sort((post1, post2) => (post1.metaData.date > post2.metaData.date ? -1 : 1))
+    .filter((_, index) => index >= start && index < end);
 
   return {
     posts,
-    total
+    total,
   };
 };
 export const getAllPosts = () => {

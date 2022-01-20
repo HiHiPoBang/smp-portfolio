@@ -1,6 +1,7 @@
 export const PRIMARY_FONT_COLOR = '#333333';
 export const REGULAR_FONT_COLOR = '#606266';
 export const SECONDARY_FONT_COLOR = '#909399';
+export const PRIMARY_BG_COLOR = '#A4A6D5';
 
 export const BORDER_COLOR = '#888888';
 export const BORDER_LIGHT_COLOR = '#DCDFE6';

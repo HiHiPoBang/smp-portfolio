@@ -10,8 +10,6 @@ const Navigation = styled.nav`
   justify-content: flex-end;
   width: 100vw;
   padding: 1rem 2rem;
-  background: #ffffff;
-  border: 1px solid #ddd;
 `;
 const Header = () => (
   <header>
