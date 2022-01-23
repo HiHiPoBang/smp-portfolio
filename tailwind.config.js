@@ -9,7 +9,10 @@ module.exports = {
         sans: ['Graphik', 'sans-serif'],
         serif: ['Merriweather', 'serif'],
       },
+      colors: {
+        primary: '#333333',
+      },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 };

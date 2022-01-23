@@ -1,36 +1,11 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import NextImage from 'next/image';
-import styled from 'styled-components';
-import {
-  REGULAR_FONT_COLOR,
-  PRIMARY_FONT_SIZE,
-  SECONDARY_FONT_COLOR,
-  REGULAR_FONT_SIZE,
-  BORDER_LIGHT_COLOR,
-} from '../../components/stylesConfig';
+import tw from 'tailwind-styled-components';
 import { getPosts } from '../../lib/api';
 import * as R from 'ramda';
 import { IPost } from '../../types/post';
 import { Layout, H3, SiteLink } from '../../components';
 
-const PostContainer = styled.div`
-  min-height: 200px;
-  border-bottom: 1px solid ${BORDER_LIGHT_COLOR};
-`;
-const Description = styled.p`
-  margin: 0.5rem 0 1rem 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  color: ${REGULAR_FONT_COLOR};
-  font-size: ${PRIMARY_FONT_SIZE};
-`;
-const FooterLabel = styled.label`
-  display: inline-block;
-  color: ${SECONDARY_FONT_COLOR};
-  font-size: ${REGULAR_FONT_SIZE};
-`;
 type Props = {
   posts: IPost[];
   total: number;
@@ -51,13 +26,10 @@ const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
   };
   return (
     <Layout>
-      <div className="mt-14 flex flex-col items-center">
+      <div className="pt-14 flex flex-col items-center">
         {posts.map((post) => (
-          <PostContainer
-            key={post.slug}
-            className="grid sm:grid-cols-12 grid-cols-1 mx-2 mb-4 md:w-full max-w-screen-md p-4 bg-gray-50"
-          >
-            <figure className="sm:col-span-4 mb-4 lg:mb-0 w-full">
+          <PostWrapper key={post.slug}>
+            <Thumbnail>
               <SiteLink herf={`/blog/${post.slug}`}>
                 <NextImage
                   src={post.metaData.thumbnailUrl}
@@ -67,18 +39,18 @@ const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
                   height="70px"
                 />
               </SiteLink>
-            </figure>
-            <section className="sm:col-span-8 flex flex-col h-full sm:pl-5 px-1">
+            </Thumbnail>
+            <Briefly>
               <SiteLink herf={`/blog/${post.slug}`}>
                 <H3 className="mb-1">{post.metaData.title}</H3>
               </SiteLink>
               <FooterLabel>{post.metaData.date}</FooterLabel>
-              <Description className="grow">{post.metaData.description}</Description>
+              <Description>{post.metaData.description}</Description>
               <SiteLink herf={`/blog/${post.slug}`}>
                 <FooterLabel className="w-full text-right">more...</FooterLabel>
               </SiteLink>
-            </section>
-          </PostContainer>
+            </Briefly>
+          </PostWrapper>
         ))}
         <div className="flex justify-between">
           {renderPagination(false)}
@@ -106,4 +78,48 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   };
 };
+const PostWrapper = tw.div`
+  grid
+  sm:grid-cols-12
+  grid-cols-1
+  mx-2
+  mb-4
+  md:w-full
+  max-w-screen-md
+  p-4
+  min-h-[200px]
+  border
+  divide-y
+  divide-gray-200
+  bg-gray-50
+`;
+const Thumbnail = tw.figure`
+  sm:col-span-4
+  mb-4
+  lg:mb-0
+  w-full
+`;
+const Briefly = tw.section`
+  sm:col-span-8
+  flex
+  flex-col
+  h-full
+  sm:pl-5
+  px-1
+`;
+const Description = tw.p`
+  grow
+  mt-2
+  mb-4
+  margin: 0.5rem 0 1rem 0;
+  line-clamp-3
+  text-gray-800
+  text-base
+`;
+const FooterLabel = tw.label`
+  inline-block
+  text-gray-600
+  text-base
+`;
+
 export default Blog;

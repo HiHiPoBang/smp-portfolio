@@ -39,8 +39,8 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
   };
   return (
     <Layout>
-      <div className="my-4 flex flex-col items-center">
-        <div className="md:w-full max-w-screen-lg">
+      <div className="py-14 flex flex-col items-center">
+        <div className="md:w-full max-w-screen-lg min-h-screen">
           <H1>{metaData.title}</H1>
           {renderBlogBanner(metaData)}
           <MarkdownWrapper>
