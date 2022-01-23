@@ -16,7 +16,7 @@ const Layout = ({ children, title = 'Welcome to Iris Blog' }: Props) => (
     </Head>
     <Header />
     <main className="min-w-full bg-gray-200">{children}</main>
-    <Footer/>
+    <Footer />
   </>
 );
 

@@ -94,9 +94,7 @@ const isPageValidate = (page: string | string[] | undefined) => {
 };
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const hasPage = R.has('page');
-  const page = R.isEmpty(query) 
-    ? 1
-    : !isPageValidate(query.page) || !hasPage(query) ? 0 : Number(query.page);
+  const page = R.isEmpty(query) ? 1 : !isPageValidate(query.page) || !hasPage(query) ? 0 : Number(query.page);
   const size = 10;
   const { total, posts } = getPosts({ page, size });
   return {
