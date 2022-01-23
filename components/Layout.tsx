@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
 import Header from './Header';
+import Footer from './Footer';
 
 type Props = {
   children?: ReactNode;
@@ -14,8 +15,8 @@ const Layout = ({ children, title = 'Welcome to Iris Blog' }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Header />
-    <main className="min-w-full min-h-screen bg-gray-200 overflow-auto">{children}</main>
-    <footer></footer>
+    <main className="min-w-full bg-gray-200">{children}</main>
+    <Footer/>
   </>
 );
 
