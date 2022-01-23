@@ -11,7 +11,7 @@ const Home: NextPage = () => {
           <div className="flex flex-col items-center w-full h-auto pb-6">
             <figure className="mb-6 lg:mb-0 w-full max-w-[400px] h-[300px] lg:h-auto p-0 lg:pt-4 overflow-hidden">
               <NextImage
-                src="/assets/home/avatar.png"
+                src="/assets/home/avatar.svg"
                 layout="responsive"
                 objectFit="cover"
                 width="100%"
