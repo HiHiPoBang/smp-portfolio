@@ -5,5 +5,6 @@ import { H1, H2, H3 } from './H';
 import BlogBanner from './BlogBanner';
 import MarkdownWrapper from './MarkdownWrapper';
 import SiteLink from './SiteLink';
+import Comment from './Comment';
 
-export { Layout, Header, Footer, H1, H2, H3, BlogBanner, MarkdownWrapper, SiteLink };
+export { Layout, Header, Footer, H1, H2, H3, BlogBanner, MarkdownWrapper, SiteLink, Comment };

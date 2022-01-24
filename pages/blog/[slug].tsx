@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
 import { getPostBySlug, getAllPosts, getPrevAndNextPostBySlug } from '../../lib/api';
 import mdxToMdxSource from '../../lib/mdxToMdxSource';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import type { NextPage } from 'next';
-import { Layout, H1, BlogBanner, MarkdownWrapper, SiteLink } from '../../components';
+import { Layout, H1, BlogBanner, MarkdownWrapper, SiteLink, Comment } from '../../components';
 import { IPostMeta, IPost } from '../../types/post';
+import { useRouter } from 'next/router';
 
 type PostType = {
   metaData: IPostMeta;
@@ -22,6 +24,18 @@ type Params = {
   };
 };
 const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Props) => {
+  const router = useRouter();
+  const [isCommentRender, setIsCommentRender] = useState(true);
+
+  useEffect(() => {
+    const handleStart = () => {
+      const isRender = !isCommentRender;
+      setIsCommentRender(isRender);
+    }
+    router.events.on('routeChangeStart', handleStart)
+    router.events.on('routeChangeComplete', handleStart)
+  }, [isCommentRender, router]);
+
   const renderBlogBanner = (metaData: IPostMeta) => {
     return metaData.thumbnailUrl ? <BlogBanner src={metaData.thumbnailUrl} /> : null;
   };
@@ -37,6 +51,10 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
       </SiteLink>
     );
   };
+  const renderCommentBox = (isRender: boolean) => {
+    return isRender ? <Comment/> : null;
+  }
+  
   return (
     <Layout>
       <div className="py-14 flex flex-col items-center">
@@ -51,6 +69,7 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
           {renderPostLink(prevPost, false)}
           {renderPostLink(nextPost, true)}
         </div>
+        {renderCommentBox(isCommentRender)}
       </div>
     </Layout>
   );
@@ -62,6 +81,7 @@ export const getStaticProps = async ({ params: { slug } }: Params) => {
 
   return {
     props: {
+      slug,
       metaData,
       mdxSource,
       prevPost,
