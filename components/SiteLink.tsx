@@ -1,16 +1,14 @@
 import type { ReactNode } from 'react';
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import Link from 'next/link';
-import { H6_FONT_SIZE, PRIMARY_FONT_COLOR, SECONDARY_FONT_COLOR } from './stylesConfig';
 
-const LinkText = styled.a`
-  font-size: ${H6_FONT_SIZE};
-  color: ${SECONDARY_FONT_COLOR};
-  cursor: pointer;
-  transition: color 0.3s;
-  &:hover {
-    color: ${PRIMARY_FONT_COLOR};
-  }
+const LinkText = tw.a`
+  text-lg
+  text-gray-600
+  cursor-pointer
+  transition-[color]
+  duration-300
+  hover:color-primary
 `;
 
 type Porps = {

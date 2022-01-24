@@ -1,21 +1,22 @@
-import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import SiteLink from './SiteLink';
 
-const Navigation = styled.nav`
-  z-index: 1;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: flex-end;
-  width: 100vw;
-  padding: 1rem 2rem;
+const Navigation = tw.nav`
+  z-10
+  fixed
+  top-0
+  left-0
+  flex
+  justify-end
+  w-full
+  py-4
+  px-8
+  bg-gray-200
 `;
 const Header = () => (
   <header>
     <Navigation className="flex justify-end gap-4">
       <SiteLink herf="/">Home</SiteLink>
-      <SiteLink herf="/about">About</SiteLink>
       <SiteLink herf="/blog">Blog</SiteLink>
     </Navigation>
   </header>

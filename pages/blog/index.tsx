@@ -42,7 +42,7 @@ const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
             </Thumbnail>
             <Briefly>
               <SiteLink herf={`/blog/${post.slug}`}>
-                <H3 className="mb-1">{post.metaData.title}</H3>
+                <Title>{post.metaData.title}</Title>
               </SiteLink>
               <FooterLabel>{post.metaData.date}</FooterLabel>
               <Description>{post.metaData.description}</Description>
@@ -107,6 +107,9 @@ const Briefly = tw.section`
   sm:pl-5
   px-1
 `;
+const Title = tw(H3)`
+  mt-e
+`;
 const Description = tw.p`
   grow
   mt-2
@@ -118,7 +121,7 @@ const Description = tw.p`
 `;
 const FooterLabel = tw.label`
   inline-block
-  text-gray-600
+  text-gray-400
   text-base
 `;
 
