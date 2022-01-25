@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 const Comment = () => {
   useEffect(() => {
     const scriptEl = document.createElement('script');
-    const anchor = document.getElementById("inject-comments-for-uterances");
+    const anchor = document.getElementById('inject-comments-for-uterances');
     scriptEl.setAttribute('src', 'https://utteranc.es/client.js');
     scriptEl.setAttribute('repo', 'HiHiPoBang/smp-portfolio');
     scriptEl.setAttribute('issue-term', 'url');
