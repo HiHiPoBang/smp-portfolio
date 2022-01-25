@@ -26,8 +26,21 @@ const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
       : () => pageNumber > 0;
     return isVisible() ? (
       <SiteLink herf={`/blog/?page=${pageNumber}`}>
-        <FontAwesomeIcon icon={['fas', iconType]} />
-        {text}
+        {
+          isNextPage ? (
+            <>
+              {text}
+              <FontAwesomeIcon icon={iconType} />
+            </>
+          )
+          : (
+            <>
+              <FontAwesomeIcon icon={iconType} />
+              {text}
+            </>
+          )
+        }
+        
       </SiteLink>
     ) : null;
   };
