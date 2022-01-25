@@ -5,6 +5,7 @@ import { getPosts } from '../../lib/api';
 import * as R from 'ramda';
 import { IPost } from '../../types/post';
 import { Layout, H3, SiteLink } from '../../components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type Props = {
   posts: IPost[];
@@ -15,6 +16,7 @@ type Props = {
 const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
   const renderPagination = (isNextPage: boolean) => {
     const pageNumber = isNextPage ? page + 1 : page - 1;
+    const iconType = isNextPage ? 'angle-right' : 'angle-left';
     const text = isNextPage ? 'Next Page' : 'Previous Page';
     const isVisible = isNextPage
       ? () => {
@@ -22,7 +24,12 @@ const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
           return pageNumber < maxPage;
         }
       : () => pageNumber > 0;
-    return isVisible() ? <SiteLink herf={`/blog/?page=${pageNumber}`}>{text}</SiteLink> : null;
+    return isVisible() ? (
+      <SiteLink herf={`/blog/?page=${pageNumber}`}>
+        <FontAwesomeIcon icon={['fas', iconType]} />
+        {text}
+      </SiteLink>
+    ) : null;
   };
   return (
     <Layout>

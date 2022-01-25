@@ -6,6 +6,7 @@ import type { NextPage } from 'next';
 import { Layout, H1, BlogBanner, MarkdownWrapper, SiteLink, Comment } from '../../components';
 import { IPostMeta, IPost } from '../../types/post';
 import { useRouter } from 'next/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type PostType = {
   metaData: IPostMeta;
@@ -41,20 +42,27 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
   };
   const renderPostLink = (post: IPost, isNextPost: boolean) => {
     if (!post.slug) {
-      return null;
+      return <span></span>;
     }
+    const iconType = isNextPost ? 'angle-right' : 'angle-left';
     const text = isNextPost ? `${post.metaData.title}` : `${post.metaData.title}`;
-    const alignClass = isNextPost ? 'float-right' : 'float-left';
-    return (
-      <SiteLink herf={post.slug}>
-        <span className={`top ${alignClass}`}>{text}</span>
-      </SiteLink>
+    const linkContent = isNextPost ? (
+      <span className="flex">
+        {text}
+        <FontAwesomeIcon className="mt-1 ml-4" icon={['fas', iconType]} />
+      </span>
+    ) : (
+      <span className="flex">
+        <FontAwesomeIcon className="mt-1 mr-4" icon={['fas', iconType]} />
+        {text}
+      </span>
     );
+    return <SiteLink herf={post.slug}>{linkContent}</SiteLink>;
   };
   const renderCommentBox = (isRender: boolean) => {
-    return isRender ? <Comment/> : null;
-  }
-  
+    return isRender ? <Comment /> : null;
+  };
+
   return (
     <Layout>
       <div className="py-14 flex flex-col items-center">
@@ -65,9 +73,9 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
             <MDXRemote {...mdxSource} />
           </MarkdownWrapper>
         </div>
-        <div className="grid justify-between grid-cols-2 md:w-full max-w-screen-lg">
-          {renderPostLink(prevPost, false)}
-          {renderPostLink(nextPost, true)}
+        <div className="grid justify-between grid-cols-2 gap-x-8 md:w-full max-w-screen-lg">
+          <div className="cols-span-1">{renderPostLink(prevPost, false)}</div>
+          <div className="cols-span-1 flex justify-end">{renderPostLink(nextPost, true)}</div>
         </div>
         {renderCommentBox(isCommentRender)}
       </div>

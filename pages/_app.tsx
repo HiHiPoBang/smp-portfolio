@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import '../lib/fontawesome';
 import type { AppProps } from 'next/app';
 import { MDXProvider } from '@mdx-js/react';
 import { H1, H2 } from '../components';
