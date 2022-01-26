@@ -8,6 +8,7 @@ import SiteLink from './SiteLink';
 import Comment from './Comment';
 import DividerLine from './DividerLine';
 import Introduction from './Introduction';
+import IconButton from './buttons/IconButton';
 
 export {
   Layout,
@@ -23,4 +24,5 @@ export {
   Comment,
   DividerLine,
   Introduction,
+  IconButton,
 };
