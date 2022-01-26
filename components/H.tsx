@@ -6,14 +6,19 @@ const H1 = tw.h1`
   text-primary
 `;
 const H2 = tw.h2`
-  my-1
+  my-2
   text-3xl
   text-primary
 `;
 const H3 = tw.h3`
-  my-1
+  my-2
   text-2xl
   text-primary
 `;
+const H4 = tw.h4`
+  my-2
+  text-xl
+  text-primary
+`;
 
-export { H1, H2, H3 };
+export { H1, H2, H3, H4 };

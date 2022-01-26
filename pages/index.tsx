@@ -2,13 +2,13 @@ import type { NextPage } from 'next';
 import NextImage from 'next/image';
 import tw from 'tailwind-styled-components';
 import { Layout } from '../components';
-import { H2, H3 } from '../components';
+import { H2, H4, Introduction } from '../components';
 
 const Home: NextPage = () => {
   return (
     <Layout>
       <ContentWrapper>
-        <UserInfoSection>
+        <UserInfoBlock>
           <UserAvatarBlock>
             <AvatarFig>
               <NextImage
@@ -20,12 +20,15 @@ const Home: NextPage = () => {
               />
             </AvatarFig>
             <H2>Iris Pai</H2>
-            <H3>Software Engineer</H3>
+            <H4>Software Engineer</H4>
+            <section className="mt-2 text-center text-gray-700">Learning FP and be a clean coder.</section>
           </UserAvatarBlock>
-          <UserDetailInfoBlock>12312</UserDetailInfoBlock>
-        </UserInfoSection>
-        <ExperienceSection></ExperienceSection>
-        <ExperienceSection></ExperienceSection>
+          <UserDetailInfoBlock></UserDetailInfoBlock>
+        </UserInfoBlock>
+        <ExperienceBlock>
+          <Introduction />
+        </ExperienceBlock>
+        <ExperienceBlock></ExperienceBlock>
       </ContentWrapper>
     </Layout>
   );
@@ -38,14 +41,15 @@ const ContentWrapper = tw.div`
   pb-16
   w-full
 `;
-const UserInfoSection = tw.section`
+const UserInfoBlock = tw.section`
   lg:fixed
   lg:left-24
   xl:left-[12%]
   mt-14
+  px-2
   w-full
   lg:w-1/5
-  xl:w-[15%]
+  xl:w-[18%]
   shadow-sm
   shadow-gray-200
   bg-primary
@@ -73,16 +77,21 @@ const UserDetailInfoBlock = tw.div`
   w-full
   bg-gray-50
 `;
-const ExperienceSection = tw.section`
+const ExperienceBlock = tw.section`
   lg:mt-14
   lg:mr-24
   xl:mr-[12%]
+  p-6
+  md:p-12
   w-full
   lg:w-7/12
-  min-h-screen
+  xl:w-[55%]
   bg-gray-50
   shadow-sm
   shadow-gray-100
+  text-lg
+  leading-12
+  text-primary
 `;
 
 export default Home;
