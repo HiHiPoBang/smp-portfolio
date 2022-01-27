@@ -4,12 +4,11 @@ import DividerLine from './DividerLine';
 
 const Introduction = () => (
   <>
-    <b>Hi, I&apos;m Iris</b>
-    <br />
-    <section>
-      I am a driven guy who enjoys coding. I have 4+ years experience on web frontend development. Also, I&apos;m good
+    <section className="text-primary">
+      <b>Hi, I’m Iris</b>
+      <br />I am a driven guy who enjoys coding. I have 4+ years experience on web frontend development. Also, I’m good
       at communicating with people. Therefore, I cooperate well with my teammates and provide good services and products
-      for clients. I enjoy solving problems no matter it&apos;m s about programming or business logic.
+      for clients. I enjoy solving problems no matter it’s about programming or business logic.
     </section>
     <DividerLine />
     <InfoBlock>
@@ -42,7 +41,7 @@ const Introduction = () => (
       <InfoItem>
         <InfoLabel>Have experience</InfoLabel>
         <br />
-        <InfoSpan>Webpack, Highcharts, Lodash, Bootstrap, styled-components, Tailwind CSS</InfoSpan>
+        <InfoSpan>Webpack, Highcharts, Lodash, Bootstrap, styled-components, storybook, Tailwind CSS</InfoSpan>
       </InfoItem>
       <InfoItem>
         <InfoLabel>Now learning</InfoLabel>

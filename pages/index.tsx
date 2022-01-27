@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 import NextImage from 'next/image';
 import tw from 'tailwind-styled-components';
-import { Layout } from '../components';
-import { H2, H4, Introduction } from '../components';
+import { IconButton, Layout } from '../components';
+import { H2, H4, Introduction, WorkingExperience } from '../components';
 
 const Home: NextPage = () => {
   return (
@@ -21,14 +21,20 @@ const Home: NextPage = () => {
             </AvatarFig>
             <H2>Iris Pai</H2>
             <H4>Software Engineer</H4>
-            <section className="mt-2 text-center text-gray-700">Learning FP and be a clean coder.</section>
+            <section className="px-8 text-center text-gray-700">Learning FP and be a clean coder.</section>
           </UserAvatarBlock>
-          <UserDetailInfoBlock></UserDetailInfoBlock>
+          <UserDetailInfoBlock>
+            <IconButton size="lg" variant="secondary" icon={['fab', 'github']} />
+            <IconButton size="lg" variant="secondary" icon={['fab', 'linkedin']} />
+            <IconButton size="lg" variant="secondary" icon={['fab', 'medium']} />
+          </UserDetailInfoBlock>
         </UserInfoBlock>
         <ExperienceBlock>
           <Introduction />
         </ExperienceBlock>
-        <ExperienceBlock></ExperienceBlock>
+        <ExperienceBlock>
+          <WorkingExperience />
+        </ExperienceBlock>
       </ContentWrapper>
     </Layout>
   );
@@ -38,6 +44,7 @@ const ContentWrapper = tw.div`
   flex-col
   flex-start
   lg:items-end
+  pt-14
   pb-16
   w-full
 `;
@@ -45,8 +52,6 @@ const UserInfoBlock = tw.section`
   lg:fixed
   lg:left-24
   xl:left-[12%]
-  mt-14
-  px-2
   w-full
   lg:w-1/5
   xl:w-[18%]
@@ -69,20 +74,22 @@ const AvatarFig = tw.figure`
   max-w-[400px]
   h-[300px]
   lg:h-auto
-  p-0
-  lg:pt-4
   overflow-hidden
 `;
 const UserDetailInfoBlock = tw.div`
+  flex
+  justify-around
+  px-8
+  py-4
   w-full
   bg-gray-50
 `;
 const ExperienceBlock = tw.section`
-  lg:mt-14
+  mb-4
+  lg:mb-8
   lg:mr-24
   xl:mr-[12%]
   p-6
-  md:p-12
   w-full
   lg:w-7/12
   xl:w-[55%]

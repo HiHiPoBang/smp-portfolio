@@ -20,5 +20,10 @@ const H4 = tw.h4`
   text-xl
   text-primary
 `;
+const H5 = tw.h4`
+  my-2
+  text-lg
+  text-primary
+`;
 
-export { H1, H2, H3, H4 };
+export { H1, H2, H3, H4, H5 };
