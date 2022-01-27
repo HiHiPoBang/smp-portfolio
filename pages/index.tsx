@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import type { IconName } from '@fortawesome/fontawesome-common-types';
 import NextImage from 'next/image';
 import tw from 'tailwind-styled-components';
 import { IconButton, Layout } from '../components';
@@ -24,9 +25,9 @@ const Home: NextPage = () => {
             <section className="px-8 text-center text-gray-700">Learning FP and be a clean coder.</section>
           </UserAvatarBlock>
           <UserDetailInfoBlock>
-            <IconButton size="lg" variant="secondary" icon={['fab', 'github']} />
-            <IconButton size="lg" variant="secondary" icon={['fab', 'linkedin']} />
-            <IconButton size="lg" variant="secondary" icon={['fab', 'medium']} />
+            <IconLink link="https://github.com/HiHiPoBang" iconName="github" />
+            <IconLink link="" iconName="linkedin" />
+            <IconLink link="https://medium.com/@smp-iris" iconName="medium" />
           </UserDetailInfoBlock>
         </UserInfoBlock>
         <ExperienceBlock>
@@ -84,6 +85,16 @@ const UserDetailInfoBlock = tw.div`
   w-full
   bg-gray-50
 `;
+
+type IconLinkProp = {
+  link: string;
+  iconName: IconName;
+};
+const IconLink = ({ link, iconName }: IconLinkProp) => (
+  <a href={link} target="_blank" rel="noreferrer">
+    <IconButton size="xl" variant="secondary" icon={['fab', iconName]} />
+  </a>
+);
 const ExperienceBlock = tw.section`
   mb-4
   lg:mb-8
