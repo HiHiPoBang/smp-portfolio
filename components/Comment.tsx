@@ -6,7 +6,7 @@ const Comment = () => {
     const anchor = document.getElementById('inject-comments-for-uterances');
     scriptEl.setAttribute('src', 'https://utteranc.es/client.js');
     scriptEl.setAttribute('repo', 'HiHiPoBang/smp-portfolio');
-    scriptEl.setAttribute('issue-term', 'url');
+    scriptEl.setAttribute('issue-term', 'pathname');
     scriptEl.setAttribute('theme', 'github-light');
     scriptEl.setAttribute('crossorigin', 'anonymous');
     scriptEl.setAttribute('async', 'true');
