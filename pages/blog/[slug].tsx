@@ -38,7 +38,7 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
     return () => {
       router.events.off('routeChangeStart', handleStart);
       router.events.off('routeChangeComplete', handleStart);
-    }
+    };
   }, [isCommentRender, router]);
 
   const renderBlogBanner = (metaData: IPostMeta) => {

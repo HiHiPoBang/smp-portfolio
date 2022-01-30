@@ -17,7 +17,7 @@ const Comment = () => {
       if (node) {
         parent?.removeChild(node);
       }
-    }
+    };
   });
   return (
     <div id="comment-wrapper" className="w-full">
