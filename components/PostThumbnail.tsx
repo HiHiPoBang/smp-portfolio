@@ -9,7 +9,14 @@ const PostThumbnail = ({ slug, thumbnailUrl, title, date, description }: Props) 
     <PostWrapper key={slug}>
       <Thumbnail>
         <SiteLink herf={`/blog/${slug}`}>
-          <NextImage src={thumbnailUrl} layout="responsive" objectFit="cover" width="100%" height="70px" />
+          <NextImage
+            src={thumbnailUrl}
+            layout="responsive"
+            objectFit="cover"
+            width="100%"
+            height="70px"
+            priority={true}
+          />
         </SiteLink>
       </Thumbnail>
       <Briefly>
