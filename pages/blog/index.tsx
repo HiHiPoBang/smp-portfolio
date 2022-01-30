@@ -1,10 +1,8 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import NextImage from 'next/image';
-import tw from 'tailwind-styled-components';
 import { getPosts } from '../../lib/api';
 import * as R from 'ramda';
 import { IPost } from '../../types/post';
-import { Layout, H3, SiteLink } from '../../components';
+import { Layout, SiteLink, PostThumbnail } from '../../components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type Props = {
@@ -44,29 +42,14 @@ const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
     <Layout>
       <div className="pt-14 flex flex-col items-center">
         {posts.map((post) => (
-          <PostWrapper key={post.slug}>
-            <Thumbnail>
-              <SiteLink herf={`/blog/${post.slug}`}>
-                <NextImage
-                  src={post.metaData.thumbnailUrl}
-                  layout="responsive"
-                  objectFit="cover"
-                  width="100%"
-                  height="70px"
-                />
-              </SiteLink>
-            </Thumbnail>
-            <Briefly>
-              <SiteLink herf={`/blog/${post.slug}`}>
-                <Title>{post.metaData.title}</Title>
-              </SiteLink>
-              <FooterLabel>{post.metaData.date}</FooterLabel>
-              <Description>{post.metaData.description}</Description>
-              <SiteLink herf={`/blog/${post.slug}`}>
-                <FooterLabel className="w-full text-right">more...</FooterLabel>
-              </SiteLink>
-            </Briefly>
-          </PostWrapper>
+          <PostThumbnail
+            key={post.slug}
+            slug={post.slug}
+            thumbnailUrl={post.metaData.thumbnailUrl}
+            title={post.metaData.title}
+            date={post.metaData.date}
+            description={post.metaData.description}
+          />
         ))}
         <div className="flex justify-between">
           {renderPagination(false)}
@@ -94,51 +77,5 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   };
 };
-const PostWrapper = tw.div`
-  grid
-  sm:grid-cols-12
-  grid-cols-1
-  mx-2
-  mb-4
-  md:w-full
-  max-w-screen-md
-  p-4
-  min-h-[200px]
-  border
-  divide-y
-  divide-gray-200
-  bg-gray-50
-`;
-const Thumbnail = tw.figure`
-  sm:col-span-4
-  mb-4
-  lg:mb-0
-  w-full
-`;
-const Briefly = tw.section`
-  sm:col-span-8
-  flex
-  flex-col
-  h-full
-  sm:pl-5
-  px-1
-`;
-const Title = tw(H3)`
-  mt-e
-`;
-const Description = tw.p`
-  grow
-  mt-2
-  mb-4
-  margin: 0.5rem 0 1rem 0;
-  line-clamp-3
-  text-gray-800
-  text-base
-`;
-const FooterLabel = tw.label`
-  inline-block
-  text-gray-400
-  text-base
-`;
 
 export default Blog;

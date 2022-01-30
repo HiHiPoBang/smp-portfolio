@@ -1,11 +1,13 @@
+export interface ISlug {
+  slug: string;
+}
 export interface IPostMeta {
+  thumbnailUrl: string;
   title: string;
   date: string;
-  thumbnailUrl: string;
-  description?: string;
+  description: string;
   tags?: string[];
 }
-export interface IPost {
-  slug: string;
+export interface IPost extends ISlug {
   metaData: IPostMeta;
 }

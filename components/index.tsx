@@ -10,6 +10,7 @@ import DividerLine from './DividerLine';
 import IconButton from './buttons/IconButton';
 import Introduction from './Introduction';
 import WorkingExperience from './WorkingExperience';
+import PostThumbnail from './PostThumbnail';
 
 export {
   Layout,
@@ -28,4 +29,5 @@ export {
   IconButton,
   Introduction,
   WorkingExperience,
+  PostThumbnail,
 };
