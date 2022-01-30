@@ -1,6 +1,6 @@
 import tw from 'tailwind-styled-components';
 import { H3 } from './H';
-import DividerLine from './DividerLine';
+import { DividerLine } from '.';
 
 const Introduction = () => (
   <>

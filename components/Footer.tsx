@@ -1,5 +1,5 @@
 import tw from 'tailwind-styled-components';
-import IconButton from './buttons/IconButton';
+import { IconButton } from '.';
 
 const FooterWrapper = tw.footer`
   w-full

@@ -1,5 +1,5 @@
 import tw from 'tailwind-styled-components';
-import SiteLink from './SiteLink';
+import { SiteLink } from '.';
 
 const Header = () => (
   <>
