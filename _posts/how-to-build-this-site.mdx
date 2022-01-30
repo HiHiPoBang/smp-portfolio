@@ -1,7 +1,57 @@
 ---
-title: "Build blog by Next.js and write blog by MDX"
+title: "How do I build this site"
 date: 'January 18, 2022'
 description: 'Find the best way to build highcharts components as library Find the best way to build highcharts components as library Find the best way to build highcharts components as library  Find the best way to build highcharts components as library'
 thumbnailUrl: '/assets/blog/how-to-build-this-site/how-to-build-this-site.jpeg'
-tags: ['functions', 'javascript']
+tags: ['blog', 'javascript', 'Next.js']
 ---
+
+## The motivaion
+Keep learning is an important mindset being an frontend engineer, so I want a place to record what I learned or something interested.
+
+## What pages
+* Home: self-introduction
+* Blog: list all the posts
+* Blog/[post]: the content of post
+
+### Wireframe
+
+#### Home
+<img src="/assets/blog/how-to-build-this-site/wireframe-home.jpg"  alt="Wireframe home" width="100%"/>
+
+* Block on the left
+  * On the top of sidebar, there is avatar, name
+  * And the bottom of it, there are links of my github, linkedin and medium, also have download button of my resume
+* Block on the right
+  * First, there will be Self-introduction, skills and my contact information,
+  * then writing my working experience about what I do and developed.
+
+#### Blog and Posts
+<img src="/assets/blog/how-to-build-this-site/wireframe-blog.jpg"  alt="Wireframe home" width="100%"/>
+
+* Blog: list all the posts in pagination
+  * There are thumbnail, title, description and read more button on every post block
+  * The pagination buttons which link switch list.
+* Post
+  * There are title, banner, and articlein in the content.
+  * Pagination to li
+
+# How do I build the site
+I use [Next.js](https://nextjs.org/) to build this site, it is a popular React framework, and support to create CSR, SSR and SGG apps. To write blog easily, I would like to use markdown. Next.js also provide a a intuitive and simple way using [MDX](https://mdxjs.com/) to write blog post.
+And deploy my site by [Vercel](https://vercel.com/).
+
+## Others What I use
+* [styled-components](https://styled-components.com/)
+* [tailwind css](https://tailwindcss.com/)
+* [tailwind-styled-components](https://www.npmjs.com/package/tailwind-styled-components)
+* [ramda](https://ramdajs.com/docs/#)
+* [fontawesome 6](https://fontawesome.com/v6.0/icons)
+
+## Use these to improve development
+* [eslint](https://eslint.org/)
+* [prettier](https://prettier.io/)
+* [typescript](https://www.typescriptlang.org/)
+* [husky](https://typicode.github.io/husky/#/)
+
+
+
