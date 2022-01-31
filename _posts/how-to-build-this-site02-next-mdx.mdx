@@ -1,0 +1,42 @@
+---
+title: "How do I build this site 02 - Next.js & MDX"
+date: 'January 18, 2022'
+description: 'I would like to be a the enthusiasm and professional engineer. Keep learning and willing to share to improve myself, so I start to write some blogs about what I learned or something interesting.'
+thumbnailUrl: '/assets/blog/how-to-build-this-site02-next-mdx/how-to-build-this-site02-next-mdx.jpg'
+tags: ['blog', 'javascript', 'Next.js']
+---
+
+## What are Next.js & MDX
+
+### Next.js
+Next.js is a open-sourced and React-based framework. You can create SSR and SGR app easiily, and it also support ISR with [SWR](https://www.npmjs.com/package/swr) library.
+There are completed documents and many [examples](https://nextjs.org/examples) for you to learn Next.js, one of the case is using MDX/MD on Next.js.
+
+### MDX
+MDX allow you use JSX in the markdown content. There is a package provide a good integration on it, you can use custom components or override the markdown sytnx with your components.
+
+It's a straightforward way for me writing blog and with less burdensome on maintenance. That's the reason I decide to use MDX and Next.js building my blog. 
+
+## How to start?
+
+Next.js provides a CLI tool enable you to quickliy start building a new Next.js application, you don't need to set up everything by yourself.
+I use npm in my case showing.
+
+```
+npx create-next-app@latest
+```
+I would like to use typescript, the CLI tool also provides `--ts` or `--typescript` flag.
+
+```
+npx create-next-app@latest --ts
+```
+After enter this command line, you need to enter `y` and your project name.
+<img src="/assets/blog/how-to-build-this-site02-next-mdx/setup-option-in-nextjs.png"  alt="set up in next.js app" width="60%"/>
+Then, it will install dependency packages. After installed end, there is the successful information and some scripts tip to start running project.
+<img src="/assets/blog/how-to-build-this-site02-next-mdx/setup-finished-in-nextjs.png"  alt="next.js install completed" width="60%"/>
+
+Enter the command line, `npm run dev`, and open link `http://localhost:3000/` to see the Next.js app running.
+
+<img src="/assets/blog/how-to-build-this-site02-next-mdx/setup-initial-nextjs.png"  alt="Run the Next.js app" width="80%"/>
+
+## Use MDX in Next.js
