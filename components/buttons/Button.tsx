@@ -1,5 +1,5 @@
 import tw from 'tailwind-styled-components';
-import {BtnProps} from '../../types/button';
+import { BtnProps } from '../../types/button';
 
 const Button = tw.button`
   py-2
