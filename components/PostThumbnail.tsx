@@ -42,10 +42,6 @@ const PostWrapper = tw.div`
   max-w-screen-md
   p-4
   min-h-[200px]
-  border
-  divide-y
-  divide-gray-200
-  md:divide-transparent
   bg-gray-50
 `;
 const Thumbnail = tw.figure`
@@ -54,7 +50,8 @@ const Thumbnail = tw.figure`
   md:mb-0
   md:mt-3
   w-full
-  h-[172px]
+  h-auto
+  md:h-[172px]
 `;
 const Briefly = tw.section`
   sm:col-span-8
