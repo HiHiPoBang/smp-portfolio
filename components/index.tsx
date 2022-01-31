@@ -9,6 +9,7 @@ import Comment from './Comment';
 import DividerLine from './DividerLine';
 import IconButton from './buttons/IconButton';
 import Button from './buttons/Button';
+import ButtonWithIcon from './buttons/ButtonWithIcon';
 import Introduction from './Introduction';
 import WorkingExperience from './WorkingExperience';
 import PostThumbnail from './PostThumbnail';
@@ -29,6 +30,7 @@ export {
   DividerLine,
   IconButton,
   Button,
+  ButtonWithIcon,
   Introduction,
   WorkingExperience,
   PostThumbnail,
