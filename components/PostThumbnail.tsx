@@ -51,8 +51,10 @@ const PostWrapper = tw.div`
 const Thumbnail = tw.figure`
   sm:col-span-4
   mb-4
-  lg:mb-0
+  md:mb-0
+  md:mt-3
   w-full
+  h-[172px]
 `;
 const Briefly = tw.section`
   sm:col-span-8

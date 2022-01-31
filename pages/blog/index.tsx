@@ -4,6 +4,7 @@ import * as R from 'ramda';
 import { IPost } from '../../types/post';
 import { Layout, SiteLink, PostThumbnail } from '../../components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import tw from 'tailwind-styled-components';
 
 type Props = {
   posts: IPost[];
@@ -51,10 +52,10 @@ const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
             description={post.metaData.description}
           />
         ))}
-        <div className="flex justify-between">
+        <PaginationWrapper>
           {renderPagination(false)}
           {renderPagination(true)}
-        </div>
+        </PaginationWrapper>
       </div>
     </Layout>
   );
@@ -77,5 +78,13 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   };
 };
-
+const PaginationWrapper = tw.div`
+  grid
+  justify-between
+  grid-cols-1
+  md:grid-cols-2
+  gap-x-8
+  md:w-full
+  max-w-screen-lg
+`;
 export default Blog;

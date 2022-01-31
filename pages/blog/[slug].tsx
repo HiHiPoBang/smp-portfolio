@@ -7,6 +7,7 @@ import { Layout, H1, BlogBanner, MarkdownWrapper, SiteLink, Comment } from '../.
 import { IPostMeta, IPost } from '../../types/post';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import tw from 'tailwind-styled-components';
 
 type PostType = {
   metaData: IPostMeta;
@@ -77,15 +78,24 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
             <MDXRemote {...mdxSource} />
           </MarkdownWrapper>
         </div>
-        <div className="grid justify-between grid-cols-2 gap-x-8 md:w-full max-w-screen-lg">
+        <PaginationWrapper>
           <div className="cols-span-1">{renderPostLink(prevPost, false)}</div>
           <div className="cols-span-1 flex justify-end">{renderPostLink(nextPost, true)}</div>
-        </div>
+        </PaginationWrapper>
         {renderCommentBox(isCommentRender)}
       </div>
     </Layout>
   );
 };
+const PaginationWrapper = tw.div`
+  grid
+  justify-between
+  grid-cols-1
+  md:grid-cols-2
+  gap-x-8
+  md:w-full
+  max-w-screen-lg
+`;
 export const getStaticProps = async ({ params: { slug } }: Params) => {
   const { metaData, content } = getPostBySlug(slug);
   const { prevPost, nextPost } = getPrevAndNextPostBySlug(slug);

@@ -6,7 +6,8 @@ const ImageContainer = tw.div`
   relative
   mt-4
   w-full
-  h-[250px]
+  h-[200px]
+  md:h-[400px]
 `;
 
 const Image = ({ alt, ...otherProps }: ImageProps) => (
