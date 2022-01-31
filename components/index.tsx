@@ -8,6 +8,7 @@ import SiteLink from './SiteLink';
 import Comment from './Comment';
 import DividerLine from './DividerLine';
 import IconButton from './buttons/IconButton';
+import Button from './buttons/Button';
 import Introduction from './Introduction';
 import WorkingExperience from './WorkingExperience';
 import PostThumbnail from './PostThumbnail';
@@ -27,6 +28,7 @@ export {
   Comment,
   DividerLine,
   IconButton,
+  Button,
   Introduction,
   WorkingExperience,
   PostThumbnail,

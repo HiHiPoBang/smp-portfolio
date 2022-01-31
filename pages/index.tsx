@@ -3,7 +3,7 @@ import type { IconName } from '@fortawesome/fontawesome-common-types';
 import NextImage from 'next/image';
 import tw from 'tailwind-styled-components';
 import { IconButton, Layout } from '../components';
-import { H2, H4, Introduction, WorkingExperience } from '../components';
+import { H2, H4, Button, Introduction, WorkingExperience } from '../components';
 
 const Home: NextPage = () => {
   return (
@@ -25,9 +25,16 @@ const Home: NextPage = () => {
             <section className="px-8 text-center text-gray-700">Learning FP and be a clean coder.</section>
           </UserAvatarBlock>
           <UserDetailInfoBlock>
-            <IconLink link="https://github.com/HiHiPoBang" iconName="github" />
-            <IconLink link="" iconName="linkedin" />
-            <IconLink link="https://medium.com/@smp-iris" iconName="medium" />
+            <div className="flex justify-around">
+              <IconLink link="https://github.com/HiHiPoBang" iconName="github" />
+              <IconLink link="" iconName="linkedin" />
+              <IconLink link="https://medium.com/@smp-iris" iconName="medium" />
+            </div>
+            <div className="mt-4">
+              <Button isFullWidth isGhost>
+                My Resume
+              </Button>
+            </div>
           </UserDetailInfoBlock>
         </UserInfoBlock>
         <ExperienceBlock>
@@ -78,9 +85,7 @@ const AvatarFig = tw.figure`
   overflow-hidden
 `;
 const UserDetailInfoBlock = tw.div`
-  flex
-  justify-around
-  px-8
+  px-4
   py-4
   w-full
   bg-gray-50
@@ -92,7 +97,7 @@ type IconLinkProp = {
 };
 const IconLink = ({ link, iconName }: IconLinkProp) => (
   <a href={link} target="_blank" rel="noreferrer">
-    <IconButton size="xl" variant="secondary" icon={['fab', iconName]} />
+    <IconButton size="lg" variant="secondary" icon={['fab', iconName]} />
   </a>
 );
 const ExperienceBlock = tw.section`
