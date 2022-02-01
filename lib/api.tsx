@@ -2,7 +2,7 @@ import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 
-const postsDirectory = join('_posts');
+const postsDirectory = join(process.cwd(), '_posts');
 const readFile = (fileName: string) => {
   const postPath = join(postsDirectory, fileName);
   return fs.readFileSync(postPath, 'utf-8');
