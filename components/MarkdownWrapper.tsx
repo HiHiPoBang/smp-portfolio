@@ -1,4 +1,4 @@
-import '../styles/Markdown.module.css';
+import styles from '../styles/Markdown.module.css';
 import type { ReactNode } from 'react';
 
 type Props = {
@@ -6,6 +6,6 @@ type Props = {
 };
 
 const MarkdownWrapper = ({ children }: Props) => {
-  return <article className="markdown-body">{children}</article>;
+  return <article className={styles['markdown-body']}>{children}</article>;
 };
 export default MarkdownWrapper;
