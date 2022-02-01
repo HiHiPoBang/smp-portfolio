@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const postsDirectory = process.env.NODE_ENV === 'development' ? path.join('public/_posts') : path.join('_posts');
+const postsDirectory = path.join('public/_posts');
 const readFile = (fileName: string) => {
   const postPath = path.join(postsDirectory, fileName);
   return fs.readFileSync(postPath, 'utf-8');
