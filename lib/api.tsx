@@ -1,10 +1,10 @@
 import fs from 'fs';
-import path from 'path';
+import { join } from 'path';
 import matter from 'gray-matter';
 
-const postsDirectory = path.join('public/_posts');
+const postsDirectory = join('_posts');
 const readFile = (fileName: string) => {
-  const postPath = path.join(postsDirectory, fileName);
+  const postPath = join(postsDirectory, fileName);
   return fs.readFileSync(postPath, 'utf-8');
 };
 export const getPostBySlug = (slug: string) => {
