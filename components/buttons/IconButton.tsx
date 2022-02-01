@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 type SizeProp = 'xl' | 'lg' | 'md' | 'sm';
 type VariantProp = 'primary' | 'secondary';
 type BtnProps = {
-  size: SizeProp;
-  variant: VariantProp;
+  $size: SizeProp;
+  $variant: VariantProp;
 };
 type IconBtnProps = {
-  icon: IconProp;
-  size: SizeProp;
-  variant: VariantProp;
+  $icon: IconProp;
+  $size: SizeProp;
+  $variant: VariantProp;
 };
 const SIZE_MAP = {
   xl: 'text-4xl',
@@ -26,13 +26,13 @@ const VARIANT_MAP = {
 };
 const findVariantStyle = (variant: VariantProp) => VARIANT_MAP[variant];
 const Button = tw.button<BtnProps>`
-  ${(props) => findSizeStyle(props.size)}
-  ${(props) => findVariantStyle(props.variant)}
+  ${(props) => findSizeStyle(props.$size)}
+  ${(props) => findVariantStyle(props.$variant)}
 `;
-const IconButton = ({ icon, size, variant }: IconBtnProps) => {
+const IconButton = ({ $icon, $size, $variant }: IconBtnProps) => {
   return (
-    <Button size={size} variant={variant}>
-      <FontAwesomeIcon icon={icon} />
+    <Button $size={$size} $variant={$variant}>
+      <FontAwesomeIcon icon={$icon} />
     </Button>
   );
 };

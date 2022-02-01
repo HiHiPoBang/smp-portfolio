@@ -1,4 +1,4 @@
 export type BtnProps = {
-  isFullWidth?: boolean;
-  isGhost?: boolean;
+  $isFullWidth?: boolean;
+  $isGhost?: boolean;
 };

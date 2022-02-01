@@ -31,7 +31,7 @@ const Home: NextPage = () => {
               <IconLink link="https://medium.com/@smp-iris" iconName="medium" />
             </div>
             <div className="mt-4">
-              <Button isFullWidth isGhost>
+              <Button $isFullWidth={true} $isGhost={true}>
                 My Resume
               </Button>
             </div>
@@ -97,7 +97,7 @@ type IconLinkProp = {
 };
 const IconLink = ({ link, iconName }: IconLinkProp) => (
   <a href={link} target="_blank" rel="noreferrer">
-    <IconButton size="lg" variant="secondary" icon={['fab', iconName]} />
+    <IconButton $size="lg" $variant="secondary" $icon={['fab', iconName]} />
   </a>
 );
 const ExperienceBlock = tw.section`
