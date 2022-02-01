@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import tw from 'tailwind-styled-components';
 import Link from 'next/link';
 
-const LinkText = tw.a`
+const LinkText = tw.span`
   text-lg
   text-gray-600
   cursor-pointer
@@ -17,7 +17,9 @@ type Porps = {
 };
 const SiteLink = ({ herf, children }: Porps) => (
   <Link href={herf}>
-    <LinkText>{children}</LinkText>
+    <a>
+      <LinkText>{children}</LinkText>
+    </a>
   </Link>
 );
 
