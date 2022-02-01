@@ -4,19 +4,53 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "test": "jest --watch --no-cache",
+    "test:coverage": "jest --coverage --no-cache",
+    "cypress:headless": "cypress run",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier '**/*.{js,jsx,ts,tsx}' --write",
+    "prepare": "husky install"
   },
   "dependencies": {
-    "next": "12.0.7",
+    "@fortawesome/fontawesome-svg-core": "^1.3.0-beta3",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^6.0.0-beta3",
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "@tailwindcss/line-clamp": "^0.3.1",
+    "babel-plugin-macros": "^3.1.0",
+    "gray-matter": "^4.0.3",
+    "next": "^12.0.8",
+    "ramda": "^0.28.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.0.2",
+    "@commitlint/config-conventional": "^16.0.0",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@types/mdx-js__react": "^1.5.5",
     "@types/node": "17.0.8",
+    "@types/ramda": "^0.27.64",
     "@types/react": "17.0.38",
+    "@types/styled-components": "^5.1.21",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "autoprefixer": "^10.4.2",
+    "babel-plugin-styled-components": "^2.0.2",
+    "cypress": "^9.4.1",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.7",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.4.7",
+    "next-mdx-remote": "^3.0.8",
+    "postcss": "^8.4.5",
+    "prettier": "^2.5.1",
+    "tailwind-styled-components": "^2.1.2",
+    "tailwindcss": "^3.0.15",
     "typescript": "4.5.4"
   }
 }
