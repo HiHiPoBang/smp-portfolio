@@ -2,7 +2,7 @@ import type { NextPage, GetServerSideProps } from 'next';
 import { getPosts } from '../../lib/api';
 import * as R from 'ramda';
 import { IPost } from '../../types/post';
-import { Layout, SiteLink, PostThumbnail } from '../../components';
+import { Layout, SiteLink, PostThumbnail, H1 } from '../../components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import tw from 'tailwind-styled-components';
 
@@ -42,6 +42,7 @@ const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
   return (
     <Layout>
       <div className="pt-14 flex flex-col items-center">
+        <H1 className="mb-4">My Blog</H1>
         {posts.map((post) => (
           <PostThumbnail
             key={post.slug}
