@@ -36,6 +36,7 @@ const PostWrapper = tw.div`
   grid
   sm:grid-cols-12
   grid-cols-1
+  content-start
   mx-2
   mb-4
   md:w-full
@@ -46,12 +47,11 @@ const PostWrapper = tw.div`
 `;
 const Thumbnail = tw.figure`
   sm:col-span-4
-  mb-4
+  mb-8
   md:mb-0
   md:mt-3
   w-full
-  h-auto
-  md:h-[172px]
+  h-[172px]
 `;
 const Briefly = tw.section`
   sm:col-span-8
