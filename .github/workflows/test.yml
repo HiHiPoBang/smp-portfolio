@@ -1,10 +1,10 @@
-name: NodeJS with Webpack
+name: Develop Push & Pull Request to Main
 
 on:
   push:
     branches: [ develop ]
   pull_request:
-    branches: [ develop ]
+    branches: [ main ]
 
 jobs:
   build:
