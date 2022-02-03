@@ -62,7 +62,7 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
         {text}
       </span>
     );
-    return <SiteLink herf={post.slug}>{linkContent}</SiteLink>;
+    return <SiteLink herf={`/blog/${post.slug}`}>{linkContent}</SiteLink>;
   };
   const renderCommentBox = (isRender: boolean) => {
     return isRender ? <Comment /> : null;
