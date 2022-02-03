@@ -54,11 +54,15 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
     const linkContent = isNextPost ? (
       <span className="flex">
         {text}
-        <FontAwesomeIcon className="mt-1 ml-4" icon={['fas', iconType]} />
+        <div className="mt-0.5 w-6">
+          <FontAwesomeIcon className="mt-1 ml-4" icon={['fas', iconType]} />
+        </div>
       </span>
     ) : (
       <span className="flex">
-        <FontAwesomeIcon className="mt-1 mr-4" icon={['fas', iconType]} />
+        <div className="mt-0.5 w-6">
+          <FontAwesomeIcon className="mt-1 mr-4" icon={['fas', iconType]} />
+        </div>
         {text}
       </span>
     );

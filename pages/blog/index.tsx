@@ -28,11 +28,15 @@ const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
         {isNextPage ? (
           <>
             {text}
-            <FontAwesomeIcon icon={iconType} />
+            <div className="mt-0.5 w-6">
+              <FontAwesomeIcon icon={iconType} />
+            </div>
           </>
         ) : (
           <>
-            <FontAwesomeIcon icon={iconType} />
+            <div className="mt-0.5 w-6">
+              <FontAwesomeIcon icon={iconType} />
+            </div>
             {text}
           </>
         )}
