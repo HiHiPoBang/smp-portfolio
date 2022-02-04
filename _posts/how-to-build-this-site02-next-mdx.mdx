@@ -1,5 +1,5 @@
 ---
-title: "How do I build this site 02 - Next.js & MDX"
+title: "Build a blog by yourself 02 - Next.js & MDX"
 date: 'January 18, 2022'
 description: 'I would like to be a the enthusiasm and professional engineer. Keep learning and willing to share to improve myself, so I start to write some blogs about what I learned or something interesting.'
 thumbnailUrl: '/assets/blog/how-to-build-this-site02-next-mdx/how-to-build-this-site02-next-mdx.svg'
@@ -67,7 +67,7 @@ Here's the content what MDX look like, we can use markdown with html tag, and js
 
 ```md
 ---
-title: "How do I build this site 01 - introduction"
+title: "Build a blog by yourself 01 - introduction"
 date: 'January 18, 2022'
 description: 'I would like to be a the enthusiasm ...'
 thumbnailUrl: '/assets/blog/how-to-build-this-site/how-to-build-this-site.jpeg'
@@ -109,7 +109,7 @@ The `<PostThumbnail>` is the custom components to link other post. There's a dem
 <PostThumbnail
   slug="how-to-build-this-site"
   thumbnailUrl="/assets/blog/how-to-build-this-site/how-to-build-this-site.jpeg"
-  title="How do I build this site 01 - introduction"
+  title="Build a blog by yourself 01 - introduction"
   date="January 18, 2022"
   description="I would like to be a the enthusiasm and professional engineer. Keep learning and willing to share to "
 />
@@ -174,7 +174,8 @@ import path from 'path'
 import matter from 'gray-matter'
 ```
 
-Next, write a method to get metadata from all posts. Use `fs.readdirSync` to get files name array in `_posts` folder, map file name as path and get metatdata by `gray-matter`.
+Next, write a method to get metadata from all posts. 
+Use `fs.readdirSync` to get files name array in `_posts` folder, map file name as path and get metatdata by `gray-matter`.
 
 ```javascript
 // api.tsx
@@ -254,37 +255,49 @@ export const getStaticPaths = () => {
 
 ### Set MDX in [slug].tsx page
 
-In the beginning, we need to install `next-mdx-remote` which support to add MDX in Next.js app. 
+In the beginning, we add a new method named `getPostBySlug` in `lib/api.tsx`, and call it when `[slug].tsx` fetch mdx in `getStaticProps`
+
+```javascript
+// lib/api.tsx
+...
+export const getPostBySlug = (slug: string) => {
+  const fileContents = readFile(`${slug}.mdx`);
+  const { data: metaData, content } = matter(fileContents);
+  return { metaData, content, slug };
+};
+...
+```
+
+Before calling `getPostBySlug`, we need to install `next-mdx-remote` which support to add MDX in Next.js app. 
 There is a method called `serialize` in `next-mdx-remote`, it parse and compile the MDX string thus rendered on page.
+
 
 ```
 npm install -D next-mdx-remote
 ```
 
-We also need fetch post content in `getStaticProps`, and use it as our [slug].tsx prop.
+The next steo is call `getPostBySlug` fetching post content and metaData in `getStaticProps`, and use them as props.
 
 ```javascript
 // [slug].tsx
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
+import { getPostBySlug } from '../../lib/api';
 import matter from 'gray-matter'
 
 export const getStaticProps = async ({ params: { slug } }: Params) => {
-  const { metaData, content } = fs.readFileSync(path.join('_posts', slug + '.mdx'), 'utf-8')
-  const { data: frontMatter, content } = matter(markdownWithMeta)
+  const { metaData, content } = getPostBySlug(slug);
   const { mdxSource } = await serialize(content);
 
   return {
     props: {
+      metaData,
       mdxSource,
     },
   };
 };
 ```
 
-After that, we import `MDXRemote` from `next-mdx-remote`, and use the <MDXRemote/> to render mdx content. 
-Not only the mdx source, we could set our custom components in the `components` prop.
+After that, we import `MDXRemote` from `next-mdx-remote`, and use the `<MDXRemote/>` to render MDX content. 
+Not only the MDX source, we could set our custom components in the `components` prop.
 I use `<PostThumbnail>` as my example.
 
 ```javascript
@@ -299,3 +312,17 @@ const Post = ({ mdxSource, prevPost, nextPost }: Props) => (
 ...
 export default Post;
 ```
+
+There is a basic content showing in the page. Because we also get the metaData, 
+we could use `thumbnailUrl` as our post banner or showing any information like tags.
+Now, we have a basic blog, we can show all the posts and click link to any post page.
+
+Next time, I'll showing how to use tailwind CSS beautifying our blog, tailwind is a CSS library based on atom class. 
+It's a new way to write style but systematic and with good performance 
+
+See you next time ! :-)
+
+## References
+- [Building a Blog With Next.js and MDX](https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/)
+- [Markdown/MDX with Next.js](https://nextjs.org/blog/markdown)
+- [Next JS Data Fetching: GetStaticProps vs GetServerSideProps](https://medium.com/eincode/next-js-data-fetching-getstaticprops-vs-getserversideprops-fcbf43d0ccac)
