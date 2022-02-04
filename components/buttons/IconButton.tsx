@@ -14,10 +14,10 @@ type IconBtnProps = {
   $variant: VariantProp;
 };
 const WIDTH_MAP = {
-  xl: 'w-16',
-  lg: 'w-14',
-  md: 'w-12',
-  sm: 'w-10',
+  xl: 'w-14',
+  lg: 'w-12',
+  md: 'w-10',
+  sm: 'w-18',
 };
 const findWitdhStyle = (size: SizeProp) => WIDTH_MAP[size];
 const SIZE_MAP = {

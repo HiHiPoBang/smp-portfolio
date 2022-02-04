@@ -56,7 +56,7 @@ The `[slug].tsx` is a way to map dynamic path name, the address is `http:localho
 <img src="/assets/blog/how-to-build-this-site02-next-mdx/blog-in-pages.png"  alt="The directory of pages" width="40%"/>
 <br/>
 
-And create `_posts` directory to place all post write by mdx, and there two mdx file as posts.
+And create `_posts` folder to place all post write by mdx, and there two mdx file as posts.
 
 <br/>
 <img src="/assets/blog/how-to-build-this-site02-next-mdx/create-_posts-directory.png"  alt="The directory of pages" width="60%"/>
@@ -116,10 +116,11 @@ The `<PostThumbnail>` is the custom components to link other post. There's a dem
 
 ## Building blog page
 
-To add content in our blog home page, which is in `index.tsx`, to list all the posts.
+There're two things we need to do, one is list all posts in `index.tsx`, the other one is show MDX content in `[slug].tsx`.
 
-### Next.js page
+### Next.js page and fetch data
 
+#### In Next.js page
 In Next.js, we can use a `getStaticProp` method to fetch data which is run at build time, and return some data, like props data used in page.
 As shown below, the basic code look like this:
 
@@ -138,10 +139,9 @@ export const getStaticProps = async () => {
 }
 export default Blog
 ```
+But if we need post list in pagination by query parameter, like `http://localhost:3000/blog?page=1`, we could not get the query in `getStaticProp`. Because it's only invoke on a build time, and not refresh data when queries are changed.
 
-But if we need pagination used in post list by query parameter, like `http://localhost:3000/blog?page=1`, we could not get the query param in `getStaticProp`. Because it's only invoke on a build time, and not refresh when query parameters are changed.
-
-Next.js provide other method `GetServerSideProps`, it's primarily used to fetch data for every time when user with different request, like query paramters are changed.
+Next.js provide other method is `GetServerSideProps`, it's primarily used to fetch data for every time when user with different request, like query paramters are changed.
 This method is used like `getStaticProp`, but we can know the query from user request.
 
 ```javascript
@@ -155,4 +155,147 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 };
 ```
 
-### Fetch Data in getStaticProp
+#### Fetch data from _posts folder
+
+To fetch data, we need to read all MDX files from `_post` directory. I would like to use an API to fetch data, so create `lib` directory, and then create `api.tsx` under `lib`.
+
+Before fetching data, we need install the `gray-matter` to get metadata from MDX file.
+
+```
+npm install -D gray-matter
+```
+
+In `api.tsx`, the first thing is to import `fs`, `path`, and `gray-matter`.
+
+```javascript
+// api.tsx
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+```
+
+Next, write a method to get metadata from all posts. Use `fs.readdirSync` to get files name array in `_posts` folder, map file name as path and get metatdata by `gray-matter`.
+
+```javascript
+// api.tsx
+...
+const postsDirectory = path.join('_posts');
+
+const readFile = (fileName: string) => {
+  const postPath = join(postsDirectory, fileName);
+  return fs.readFileSync(postPath, 'utf-8');
+};
+
+export const getAllPosts = () => {
+  const files = fs.readdirSync(postsDirectory);
+  const posts = files.map((fileName) => {
+    const markdownWithMeta = readFile(fileName);
+    const { data: metaData } = matter(markdownWithMeta);
+    return {
+      metaData,
+      slug: fileName.split('.')[0],
+    };
+  });
+  return posts;
+};
+```
+Next, we can use `getAllPosts` api to fetch data in `blog/index.tsx`. In the Blog components, we use posts as our prop to render them on blog page.
+Let's add thumbnail, title and description in every post block, and also use Link component in 'next/link' to link post.
+
+```javascript
+// index.tsx
+import { getAllPosts } from '../../lib/api';
+import Link from 'next/link'
+
+const Blog: NextPage<Props>= (props: Props) => {{
+  return (
+    <>
+      {
+        posts.map((post, index) => <div>
+          <img url={post.metaData.thumbnailUrl}/>
+          <h2>{post.metaData.title}</h2>
+          <p>{post.metaData.description}</p>
+          <Link href={`/blog/${post.slug}`}>
+            <a>Read more...</a>
+          </Link>
+        </div> )
+      }
+    </>
+  )
+}
+export const getStaticProps = async () => {
+  const posts = getAllPosts();
+  return {
+    props: {
+      posts
+    }
+  }
+}
+```
+In `slug.tsx`, it will generate all path list at build time use by `getStaticPaths`.
+
+```javascript
+// [slug].tsx
+export const getStaticPaths = () => {
+  const posts = getAllPosts();
+  const paths = posts.map((post) => {
+    return {
+      params: {
+        slug: post.slug,
+      },
+    };
+  });
+  return {
+    paths,
+    fallback: false,
+  };
+};
+```
+
+### Set MDX in [slug].tsx page
+
+In the beginning, we need to install `next-mdx-remote` which support to add MDX in Next.js app. 
+There is a method called `serialize` in `next-mdx-remote`, it parse and compile the MDX string thus rendered on page.
+
+```
+npm install -D next-mdx-remote
+```
+
+We also need fetch post content in `getStaticProps`, and use it as our [slug].tsx prop.
+
+```javascript
+// [slug].tsx
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+import matter from 'gray-matter'
+
+export const getStaticProps = async ({ params: { slug } }: Params) => {
+  const { metaData, content } = fs.readFileSync(path.join('_posts', slug + '.mdx'), 'utf-8')
+  const { data: frontMatter, content } = matter(markdownWithMeta)
+  const { mdxSource } = await serialize(content);
+
+  return {
+    props: {
+      mdxSource,
+    },
+  };
+};
+```
+
+After that, we import `MDXRemote` from `next-mdx-remote`, and use the <MDXRemote/> to render mdx content. 
+Not only the mdx source, we could set our custom components in the `components` prop.
+I use `<PostThumbnail>` as my example.
+
+```javascript
+// [slug].tsx
+...
+import { PostThumbnail } from '../../components';
+
+const markdownComponents = {PostThumbnail}
+const Post = ({ mdxSource, prevPost, nextPost }: Props) => (
+  <MDXRemote {...mdxSource} components={markdownComponents}/>
+)
+...
+export default Post;
+```
