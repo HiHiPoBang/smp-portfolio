@@ -9,8 +9,8 @@ const readFile = (fileName: string) => {
 };
 export const getPostBySlug = (slug: string) => {
   const fileContents = readFile(`${slug}.mdx`);
-  const { data: metaData, content } = matter(fileContents);
-  return { metaData, content, slug };
+  const { data: metadata, content } = matter(fileContents);
+  return { metadata, content, slug };
 };
 export const getPrevAndNextPostBySlug = (slug: string) => {
   const files = fs.readdirSync(postsDirectory);
@@ -24,11 +24,11 @@ export const getPrevAndNextPostBySlug = (slug: string) => {
 
   return {
     prevPost: {
-      metaData: prevPostMatter.data || {},
+      metadata: prevPostMatter.data || {},
       slug: prevPostSlug,
     },
     nextPost: {
-      metaData: nextPostMatter.data || {},
+      metadata: nextPostMatter.data || {},
       slug: nextPostSlug,
     },
   };
@@ -44,7 +44,7 @@ export const getPosts = ({ page = 1, size = 10 }: TypeGetPost) => {
   const end = start + size;
   const posts = files
     .map((fileName) => getPostBySlug(fileName.split('.')[0]))
-    .sort((post1, post2) => (post1.metaData.date > post2.metaData.date ? -1 : 1))
+    .sort((post1, post2) => (post1.metadata.date > post2.metadata.date ? -1 : 1))
     .filter((_, index) => index >= start && index < end);
 
   return {
@@ -56,9 +56,9 @@ export const getAllPosts = () => {
   const files = fs.readdirSync(postsDirectory);
   const posts = files.map((fileName) => {
     const markdownWithMeta = readFile(fileName);
-    const { data: metaData } = matter(markdownWithMeta);
+    const { data: metadata } = matter(markdownWithMeta);
     return {
-      metaData,
+      metadata,
       slug: fileName.split('.')[0],
     };
   });

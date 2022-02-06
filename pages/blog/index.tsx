@@ -51,10 +51,10 @@ const Blog: NextPage<Props> = ({ posts, total, page, size }: Props) => {
           <PostThumbnail
             key={post.slug}
             slug={post.slug}
-            thumbnailUrl={post.metaData.thumbnailUrl}
-            title={post.metaData.title}
-            date={post.metaData.date}
-            description={post.metaData.description}
+            thumbnailUrl={post.metadata.thumbnailUrl}
+            title={post.metadata.title}
+            date={post.metadata.date}
+            description={post.metadata.description}
           />
         ))}
         <PaginationWrapper>
