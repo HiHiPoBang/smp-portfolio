@@ -31,7 +31,7 @@ const Introduction = () => (
       <InfoItem>
         <InfoLabel>Programming Language</InfoLabel>
         <br />
-        <InfoSpan>Javascript, CSS3, HTML5</InfoSpan>
+        <InfoSpan>Javascript, ES6, CSS3, Sass, stylus, HTML5</InfoSpan>
       </InfoItem>
       <InfoItem>
         <InfoLabel>Framework</InfoLabel>
@@ -41,12 +41,12 @@ const Introduction = () => (
       <InfoItem>
         <InfoLabel>Have experience</InfoLabel>
         <br />
-        <InfoSpan>Webpack, Highcharts, Lodash, Bootstrap, styled-components, storybook, Tailwind CSS</InfoSpan>
+        <InfoSpan>Webpack, Highcharts, Bootstrap, styled-components, Storybook, Tailwind CSS, Lodash, Ramda</InfoSpan>
       </InfoItem>
       <InfoItem>
         <InfoLabel>Now learning</InfoLabel>
         <br />
-        <InfoSpan>Typescript, React, Next.js, Jest, Enzyme</InfoSpan>
+        <InfoSpan>TypeScript, React, Next.js, Jest, Enzyme</InfoSpan>
       </InfoItem>
     </InfoBlock>
   </>

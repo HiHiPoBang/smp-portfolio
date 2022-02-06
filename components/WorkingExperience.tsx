@@ -14,27 +14,36 @@ const Experience = () => {
         </CompanyBlock>
         <WorkingContentList>
           <WorkingItem>
-            <WorkingContent>Refactor and Develop shared components</WorkingContent>
-            <WorkingDescription>Co-work with UI/UX designers and apply on all products.</WorkingDescription>
+            <WorkingContent>Refactor and develop progressively</WorkingContent>
+            <WorkingDescription>
+              With clean code and unit test by <em>Jest</em>, reducing bugs and keeping agile development.{' '}
+            </WorkingDescription>
+          </WorkingItem>
+          <WorkingItem>
+            <WorkingContent>UI components for all products</WorkingContent>
+            <WorkingDescription>
+              Use <em>styled-components</em> and <em>Storybook</em> to refactor and implement UI-components library that
+              close cooperation with UI/UX designers.
+            </WorkingDescription>
           </WorkingItem>
           <WorkingItem>
             <WorkingContent>Standard Essential Patents</WorkingContent>
             <WorkingDescription>
-              A dashboard to analysis global standard essential patents.
+              A dashboard to analysis global standard essential patents. <em>(Vue, Vuex, Highcharts)</em>
               <IntroLink link="https://www.inquartik.com.tw/patentcloud/sep-omnilytics/" />
             </WorkingDescription>
           </WorkingItem>
           <WorkingItem>
-            <WorkingContent>Due Diligence</WorkingContent>
+            <WorkingContent>Due Diligence </WorkingContent>
             <WorkingDescription>
-              One-click to analysis patent information and generate a varity of charts.
+              One-click to analysis patent information and generate a varity of charts. <em>(Vue, Vuex, Highcharts)</em>
               <IntroLink link="https://www.inquartik.com.tw/patentcloud/due-diligence/" />
             </WorkingDescription>
           </WorkingItem>
           <WorkingItem>
             <WorkingContent>IP EXPLEX</WorkingContent>
             <WorkingDescription>
-              A patent transaction platform with seller’s and buyer’s management interface.
+              A patent transaction platform with seller’s and buyer’s management interface. <em>(Vue, Vuex)</em>
             </WorkingDescription>
           </WorkingItem>
         </WorkingContentList>
