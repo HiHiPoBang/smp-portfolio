@@ -10,53 +10,53 @@ tags: ['blog', 'javascript', 'Next.js']
 
 ### Next.js
 Next.js is a open-sourced and React-based framework. We can create SSR and SGR app easiily, and it also support ISR with [SWR](https://www.npmjs.com/package/swr) library.
-There are completed documents and many [examples](https://nextjs.org/examples) for we to learn Next.js, one of the case is using MDX/MD on Next.js.
+There are completed documents and many [examples](https://nextjs.org/examples) for us to learn Next.js, one of cases is using MDX/MD on Next.js.
 
 ### MDX
-MDX allow we use JSX in the markdown content. There are plugins provide a good integration on it, we can use custom components or override the markdown sytnx with wer components.
-It's a straightforward way for me writing blog and with less burdensome on maintenance. That's the reason I decide to use MDX. 
+MDX allow we use JSX in the markdown content. There are plugins providing a good integration on it, we can use custom components or override the markdown sytnx with our components.
+It's a straightforward way for us writing blog and with less burdensome on maintenance.
 
 ## How to start?
 
-Next.js provides a CLI tool enable we to quickliy start building a new Next.js application, we don't need to set up everything by werself.
-I use npm in my case showing.
+Next.js provides a CLI tool enabled us to quickliy start building a new Next.js application, we don't need to set up everything by ourselves.
+I'll use npm in my case showing.
 
 ```
 npx create-next-app@latest
 ```
-I would like to use typescript, the CLI tool also provides `--ts` or `--typescript` flag.
+If we would like to use TypeScript, the CLI tool also provides `--ts` or `--typescript` flag.
 
 ```
 npx create-next-app@latest --ts
 ```
-After enter this command line, we need to enter `y` and wer project name.
+After entered this command line, we need to enter `y` and our project name.
 <img src="/assets/blog/how-to-build-this-site02-next-mdx/setup-option-in-nextjs.png"  alt="set up in next.js app" width="60%"/>
 <br/>
 
-Then, it will install dependency packages. After install completed, there are the successful information and some scripts tip to start running project.
+Then, it will install dependency packages. After installation completed, there are a successful information and some scripts tips to start running project.
 
 <img src="/assets/blog/how-to-build-this-site02-next-mdx/setup-finished-in-nextjs.png"  alt="next.js install completed" width="60%"/>
 <br/>
 
-Enter the command line, `npm run dev`, and open link `http://localhost:3000` to see the Next.js app running.
+Enter the command line, `npm run dev`, and open link `http://localhost:3000` to see the Next.js app running on the browser.
 
 <img src="/assets/blog/how-to-build-this-site02-next-mdx/setup-initial-nextjs.png"  alt="Run the Next.js app" width="80%"/>
 <br/>
 
-There `.next` directory is generated with `npm run dev`, there are cache, server, and static files of our app.
+A `.next` directory was generated with `npm run dev`, there are cache, server, and static files of our app.
 
 
 ## Pages and routing
 
 In Next.js, all the site pages rendered by the files under `pages` directory, there are multiple page name rules to map the router.<br/>
-I need pages one of is to list all posts and the other is the content of every post. I create a folder named `blog`, and then create `index.tsx` to list posts and `[slug].tsx` about post content.
-The directory as shown below, the default file under `blog` is `index.tsx`. When we run local, the address in blog page is `http:localhost:3000/blog`.
-The `[slug].tsx` is a way to map dynamic path name, the address is `http:localhost:3000/blog/[dynamic-path-name]`.
+We need pages for our app, one of is to list all posts and the other one is the content of every post. We create a folder named `blog`, and then create `blog/index.tsx` to list posts and `blog/[slug].tsx` for post content.
+The directory as shown below, followed Next.js router rule, the default file under `blog` is `blog/index.tsx`. When we run on local, the address in blog page is `http:localhost:3000/blog`.
+The `blog/[slug].tsx` is a way to map dynamic path name, the address will be `http:localhost:3000/blog/[dynamic-path-name]`, `[dynamic-path-name]` setted by Next.js method called `getStaticPaths`.
 <br/>
 <img src="/assets/blog/how-to-build-this-site02-next-mdx/blog-in-pages.png"  alt="The directory of pages" width="40%"/>
 <br/>
 
-And create `_posts` folder to place all post write by mdx, and there two mdx file as posts.
+And create `_posts` folder to place all post wrote with MDX, and there are two mdx file as posts sample.
 
 <br/>
 <img src="/assets/blog/how-to-build-this-site02-next-mdx/create-_posts-directory.png"  alt="The directory of pages" width="60%"/>
@@ -104,8 +104,8 @@ so I start to write some blogs about what I learned or something interesting.
 
 ...
 ```
-On the top of content enclosed with `---`, it's a post metadata used YAML sytnx. The sytnx use key and value type to write any information.
-The `<PostThumbnail>` is the custom components to link other post. There's a demo as show below:
+On the top of content enclosed with `---`, it's a post metadata used YAML sytnx. The sytnx use key and value mapping to write any information on it.
+We also could set our custom component, the `<PostThumbnail>` is the example as shown below to link other post:
 <PostThumbnail
   slug="how-to-build-this-site"
   thumbnailUrl="/assets/blog/how-to-build-this-site/how-to-build-this-site.jpeg"
@@ -116,13 +116,13 @@ The `<PostThumbnail>` is the custom components to link other post. There's a dem
 
 ## Building blog page
 
-There're two things we need to do, one is list all posts in `index.tsx`, the other one is show MDX content in `[slug].tsx`.
+There're two matters we need to do, one is list all posts in `blog/index.tsx`, the other one is showing MDX content in `blog/[slug].tsx`.
 
 ### Next.js page and fetch data
 
 #### In Next.js page
-In Next.js, we can use a `getStaticProp` method to fetch data which run at build time, and return some data, like props data used in page.
-As shown below, the basic code looked like this:
+In Next.js, we can use a `getStaticProp` method to fetch data which running at build time, and return some data, like props data used in page.
+As follows shown, the basic code looked like this:
 
 ```javascript
 const Blog: NextPage<Props>= (props: Props) => {{
@@ -139,7 +139,7 @@ export const getStaticProps = async () => {
 }
 export default Blog
 ```
-But if we need post list in pagination by query parameter, like `http://localhost:3000/blog?page=1`, we could not get the query in `getStaticProp`. Because it's only invoke on a build time, and not refresh data when queries are changed.
+But if we need post list in pagination by url query parameter, such as `http://localhost:3000/blog?page=1`. We could not get the url query in `getStaticProp`, because it's only invoked on a build time, and not refresh data when queries are changed.
 
 Next.js provide other method is `GetServerSideProps`, it's primarily used to fetch data for every time when user with different request, like query paramters are changed.
 This method is used like `getStaticProp`, but we can know the query from user request.
@@ -157,7 +157,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
 #### Fetch data from _posts folder
 
-To fetch data, we need to read all MDX files from `_post` directory. I would like to use an API to fetch data, so create `lib` directory, and then create `api.tsx` under `lib`.
+To fetch data, we need to read all MDX files from `_post` directory. I prefer to use an API separately to fetch data, next create `lib` folder then add a new file named `lib/api.tsx`.
 
 Before fetching data, we need install the `gray-matter` to get metadata from MDX file.
 
@@ -173,9 +173,8 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 ```
-
-Next, write a method to get metadata from all posts. 
-Use `fs.readdirSync` to get files name array in `_posts` folder, map file name as path and get metatdata by `gray-matter`.
+write a method to get metadata from all posts afterwards. 
+Use method, `fs.readdirSync`, to get files name array in `_posts` folder, map file name as path and get metatdata by `gray-matter`.
 
 ```javascript
 // api.tsx
@@ -200,8 +199,8 @@ export const getAllPosts = () => {
   return posts;
 };
 ```
-Next, we can use `getAllPosts` api to fetch data in `blog/index.tsx`. In the Blog components, we use posts as our prop to render them on blog page.
-Let's add thumbnail, title and description in every post block, and also use Link component in 'next/link' to link post.
+After that, we can use `getAllPosts` api to fetch data in `blog/index.tsx`. In `blog/index.tsx`, we use posts as our props to render them on page.
+Let's add thumbnail, title and description in every post block, and also use `<Link>` component from `'next/link'` to link post by click event.
 
 ```javascript
 // index.tsx
@@ -255,7 +254,7 @@ export const getStaticPaths = () => {
 
 ### Set MDX in [slug].tsx page
 
-In the beginning, we add a new method named `getPostBySlug` in `lib/api.tsx`, and call it when `[slug].tsx` fetch mdx in `getStaticProps`
+In the beginning, we add a new method named `getPostBySlug` in `lib/api.tsx`, and call it when `[slug].tsx` fetch MDX files with `getStaticProps`
 
 ```javascript
 // lib/api.tsx
@@ -276,7 +275,7 @@ There is a method called `serialize` in `next-mdx-remote`, it parse and compile 
 npm install -D next-mdx-remote
 ```
 
-The next steo is call `getPostBySlug` fetching post content and metadata in `getStaticProps`, and use them as props.
+The next step is called `getPostBySlug` which fetch post content and metadata in `getStaticProps`, and use them as props of `blog/[slug].txt` page.
 
 ```javascript
 // [slug].tsx
@@ -297,8 +296,8 @@ export const getStaticProps = async ({ params: { slug } }: Params) => {
 ```
 
 After that, we import `MDXRemote` from `next-mdx-remote`, and use the `<MDXRemote/>` to render MDX content. 
-Not only the MDX source, we could set our custom components in the `components` prop.
-I use `<PostThumbnail>` as my example.
+Not only the MDX source, but we could set our custom components in the `components` prop.
+I use `<PostThumbnail>` as following case.
 
 ```javascript
 // [slug].tsx
@@ -313,14 +312,16 @@ const Post = ({ mdxSource, prevPost, nextPost }: Props) => (
 export default Post;
 ```
 
-There is a basic content showing in the page. Because we also get the metadata, 
-we could use `thumbnailUrl` as our post banner or showing any information like tags.
-Now, we have a basic blog, we can show all the posts and click link to any post page.
+There is a basic content shown in page. Because we also get metadata from `getPostBySlug`, 
+we could use `thumbnailUrl` as our post banner or showing any information.
+Now, we have a basic blog with features of listing all posts and clicking to link any post content.
 
-Next time, I'll implement how to use tailwind CSS beautifying our blog, tailwind is a CSS library based on atom class. 
+Next time, I'll implement how to use tailwind CSS beautifying our blog as shown below in the figure, tailwind is a CSS library based on atom class. 
 It's a new way to write style but systematic and with good performance.
 
-See you next time ! :-)
+<img src="/assets/blog/how-to-build-this-site02-next-mdx/result.png"  alt="Use tailwind CSS" width="100%"/>
+<br/>
+<em>See you next time ! :-)</em>
 
 ## References
 - [Building a Blog With Next.js and MDX](https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/)
