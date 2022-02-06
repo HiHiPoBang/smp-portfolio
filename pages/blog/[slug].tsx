@@ -3,7 +3,7 @@ import { getPostBySlug, getAllPosts, getPrevAndNextPostBySlug } from '../../lib/
 import mdxToMdxSource from '../../lib/mdxToMdxSource';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import type { NextPage } from 'next';
-import { Layout, H1, BlogBanner, MarkdownWrapper, SiteLink, Comment } from '../../components';
+import { Layout, H1, BlogBanner, MarkdownWrapper, SiteLink, Comment, PostThumbnail } from '../../components';
 import { IPostMeta, IPost } from '../../types/post';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,6 +24,9 @@ type Params = {
   params: {
     slug: string;
   };
+};
+const markdownComponents = {
+  PostThumbnail,
 };
 const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Props) => {
   const router = useRouter();
@@ -54,15 +57,19 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
     const linkContent = isNextPost ? (
       <span className="flex">
         {text}
-        <FontAwesomeIcon className="mt-1 ml-4" icon={['fas', iconType]} />
+        <div className="mt-0.5 w-6">
+          <FontAwesomeIcon className="mt-1 ml-4" icon={['fas', iconType]} />
+        </div>
       </span>
     ) : (
       <span className="flex">
-        <FontAwesomeIcon className="mt-1 mr-4" icon={['fas', iconType]} />
+        <div className="mt-0.5 w-6">
+          <FontAwesomeIcon className="mt-1 mr-4" icon={['fas', iconType]} />
+        </div>
         {text}
       </span>
     );
-    return <SiteLink herf={post.slug}>{linkContent}</SiteLink>;
+    return <SiteLink herf={`/blog/${post.slug}`}>{linkContent}</SiteLink>;
   };
   const renderCommentBox = (isRender: boolean) => {
     return isRender ? <Comment /> : null;
@@ -75,7 +82,7 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
           <H1>{metaData.title}</H1>
           {renderBlogBanner(metaData)}
           <MarkdownWrapper>
-            <MDXRemote {...mdxSource} />
+            <MDXRemote {...mdxSource} components={markdownComponents} />
           </MarkdownWrapper>
         </div>
         <PaginationWrapper>

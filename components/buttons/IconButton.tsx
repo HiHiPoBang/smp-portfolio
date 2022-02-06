@@ -13,6 +13,13 @@ type IconBtnProps = {
   $size: SizeProp;
   $variant: VariantProp;
 };
+const WIDTH_MAP = {
+  xl: 'w-14',
+  lg: 'w-12',
+  md: 'w-10',
+  sm: 'w-18',
+};
+const findWitdhStyle = (size: SizeProp) => WIDTH_MAP[size];
 const SIZE_MAP = {
   xl: 'text-4xl',
   lg: 'text-2xl',
@@ -26,6 +33,7 @@ const VARIANT_MAP = {
 };
 const findVariantStyle = (variant: VariantProp) => VARIANT_MAP[variant];
 const Button = tw.button<BtnProps>`
+  ${(props) => findWitdhStyle(props.$size)}
   ${(props) => findSizeStyle(props.$size)}
   ${(props) => findVariantStyle(props.$variant)}
 `;

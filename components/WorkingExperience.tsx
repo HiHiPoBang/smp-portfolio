@@ -71,9 +71,11 @@ type IntroProps = {
 };
 const IntroLink = ({ link }: IntroProps) => {
   return (
-    <a className="ml-1 pt-4 text-sm underline text-secondary" href={link} target="_blank" rel="noreferrer">
+    <a className="flex ml-1 pt-4 text-sm underline text-secondary" href={link} target="_blank" rel="noreferrer">
       <span>Product Introduction</span>
-      <FontAwesomeIcon className="ml-1" size="sm" icon={['fas', 'arrow-up-right-from-square']} />
+      <span className="inline-block ml-1 w-4">
+        <FontAwesomeIcon size="sm" icon={['fas', 'arrow-up-right-from-square']} />
+      </span>
     </a>
   );
 };
@@ -83,7 +85,9 @@ type WorkingContentProps = {
 const WorkingContent = ({ children }: WorkingContentProps) => {
   return (
     <div className="flex items-center">
-      <FontAwesomeIcon className="mr-2 text-secondary" icon={['fas', 'caret-right']} />
+      <div className="mr-2 w-4 text-secondary">
+        <FontAwesomeIcon icon={['fas', 'caret-right']} />
+      </div>
       <H5 className="text-secondary">{children}</H5>
     </div>
   );

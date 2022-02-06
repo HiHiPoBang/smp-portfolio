@@ -5,10 +5,11 @@ import NextImage from 'next/image';
 
 type Props = ISlug & IPostMeta;
 const PostThumbnail = ({ slug, thumbnailUrl, title, date, description }: Props) => {
+  const postLink = `/blog/${encodeURIComponent(slug)}`;
   return (
     <PostWrapper key={slug}>
       <Thumbnail>
-        <SiteLink herf={`/blog/${slug}`}>
+        <SiteLink herf={postLink}>
           <NextImage
             src={thumbnailUrl}
             layout="responsive"
@@ -20,12 +21,12 @@ const PostThumbnail = ({ slug, thumbnailUrl, title, date, description }: Props) 
         </SiteLink>
       </Thumbnail>
       <Briefly>
-        <SiteLink herf={`/blog/${slug}`}>
+        <SiteLink herf={postLink}>
           <Title>{title}</Title>
         </SiteLink>
         <DateLabel>{date}</DateLabel>
         <Description>{description}</Description>
-        <SiteLink herf={`/blog/${slug}`}>
+        <SiteLink herf={postLink}>
           <ReadMoreBtn>more...</ReadMoreBtn>
         </SiteLink>
       </Briefly>
