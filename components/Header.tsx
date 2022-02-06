@@ -5,7 +5,7 @@ const Header = () => (
   <>
     <HeaderWrapper>
       <Navigation className="flex justify-end gap-4">
-        <SiteLink herf="/">Home</SiteLink>
+        <SiteLink herf="/">Bio</SiteLink>
         <SiteLink herf="/blog">Blog</SiteLink>
       </Navigation>
     </HeaderWrapper>
