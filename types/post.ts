@@ -9,5 +9,5 @@ export interface IPostMeta {
   tags?: string[];
 }
 export interface IPost extends ISlug {
-  metaData: IPostMeta;
+  metadata: IPostMeta;
 }

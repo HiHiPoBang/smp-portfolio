@@ -27,13 +27,15 @@ const Home: NextPage = () => {
           <UserDetailInfoBlock>
             <div className="flex justify-around">
               <IconLink link="https://github.com/HiHiPoBang" iconName="github" />
-              <IconLink link="" iconName="linkedin" />
+              <IconLink link="https://linkedin.com/in/pai-shu-min-iris-b84325189" iconName="linkedin" />
               <IconLink link="https://medium.com/@smp-iris" iconName="medium" />
             </div>
             <div className="mt-4">
-              <Button $isFullWidth={true} $isGhost={true}>
-                My Resume
-              </Button>
+              <a href="./Iris_Pai_Resume.pdf">
+                <Button $isFullWidth={true} $isGhost={true}>
+                  My Resume
+                </Button>
+              </a>
             </div>
           </UserDetailInfoBlock>
         </UserInfoBlock>

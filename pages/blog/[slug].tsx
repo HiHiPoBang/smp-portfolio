@@ -10,11 +10,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import tw from 'tailwind-styled-components';
 
 type PostType = {
-  metaData: IPostMeta;
+  metadata: IPostMeta;
   slug: string;
 };
 type Props = {
-  metaData: IPostMeta;
+  metadata: IPostMeta;
   mdxSource: MDXRemoteSerializeResult;
   slug: string;
   prevPost: PostType;
@@ -28,7 +28,7 @@ type Params = {
 const markdownComponents = {
   PostThumbnail,
 };
-const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Props) => {
+const Post: NextPage<Props> = ({ metadata, mdxSource, prevPost, nextPost }: Props) => {
   const router = useRouter();
   const [isCommentRender, setIsCommentRender] = useState(true);
 
@@ -45,15 +45,15 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
     };
   }, [isCommentRender, router]);
 
-  const renderBlogBanner = (metaData: IPostMeta) => {
-    return metaData.thumbnailUrl ? <BlogBanner src={metaData.thumbnailUrl} /> : null;
+  const renderBlogBanner = (metadata: IPostMeta) => {
+    return metadata.thumbnailUrl ? <BlogBanner src={metadata.thumbnailUrl} /> : null;
   };
   const renderPostLink = (post: IPost, isNextPost: boolean) => {
     if (!post.slug) {
       return <span></span>;
     }
     const iconType = isNextPost ? 'angle-right' : 'angle-left';
-    const text = isNextPost ? `${post.metaData.title}` : `${post.metaData.title}`;
+    const text = isNextPost ? `${post.metadata.title}` : `${post.metadata.title}`;
     const linkContent = isNextPost ? (
       <span className="flex">
         {text}
@@ -79,8 +79,8 @@ const Post: NextPage<Props> = ({ metaData, mdxSource, prevPost, nextPost }: Prop
     <Layout>
       <div className="py-14 px-4 flex flex-col items-center">
         <div className="w-full md:w-3/4 max-w-[1000px] min-h-screen">
-          <H1>{metaData.title}</H1>
-          {renderBlogBanner(metaData)}
+          <H1>{metadata.title}</H1>
+          {renderBlogBanner(metadata)}
           <MarkdownWrapper>
             <MDXRemote {...mdxSource} components={markdownComponents} />
           </MarkdownWrapper>
@@ -104,14 +104,14 @@ const PaginationWrapper = tw.div`
   max-w-screen-lg
 `;
 export const getStaticProps = async ({ params: { slug } }: Params) => {
-  const { metaData, content } = getPostBySlug(slug);
+  const { metadata, content } = getPostBySlug(slug);
   const { prevPost, nextPost } = getPrevAndNextPostBySlug(slug);
   const { mdxSource } = await mdxToMdxSource(content);
 
   return {
     props: {
       slug,
-      metaData,
+      metadata,
       mdxSource,
       prevPost,
       nextPost,

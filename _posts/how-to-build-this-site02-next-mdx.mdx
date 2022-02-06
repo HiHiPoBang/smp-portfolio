@@ -63,7 +63,7 @@ And create `_posts` folder to place all post write by mdx, and there two mdx fil
 <br/>
 
 ## How to write MDX
-Here's the content what MDX look like, we can use markdown with html tag, and jsx.
+Here's the content what MDX looked like, we can use markdown with html tag, and jsx.
 
 ```md
 ---
@@ -121,8 +121,8 @@ There're two things we need to do, one is list all posts in `index.tsx`, the oth
 ### Next.js page and fetch data
 
 #### In Next.js page
-In Next.js, we can use a `getStaticProp` method to fetch data which is run at build time, and return some data, like props data used in page.
-As shown below, the basic code look like this:
+In Next.js, we can use a `getStaticProp` method to fetch data which run at build time, and return some data, like props data used in page.
+As shown below, the basic code looked like this:
 
 ```javascript
 const Blog: NextPage<Props>= (props: Props) => {{
@@ -191,9 +191,9 @@ export const getAllPosts = () => {
   const files = fs.readdirSync(postsDirectory);
   const posts = files.map((fileName) => {
     const markdownWithMeta = readFile(fileName);
-    const { data: metaData } = matter(markdownWithMeta);
+    const { data: metadata } = matter(markdownWithMeta);
     return {
-      metaData,
+      metadata,
       slug: fileName.split('.')[0],
     };
   });
@@ -213,9 +213,9 @@ const Blog: NextPage<Props>= (props: Props) => {{
     <>
       {
         posts.map((post, index) => <div>
-          <img url={post.metaData.thumbnailUrl}/>
-          <h2>{post.metaData.title}</h2>
-          <p>{post.metaData.description}</p>
+          <img url={post.metadata.thumbnailUrl}/>
+          <h2>{post.metadata.title}</h2>
+          <p>{post.metadata.description}</p>
           <Link href={`/blog/${post.slug}`}>
             <a>Read more...</a>
           </Link>
@@ -262,8 +262,8 @@ In the beginning, we add a new method named `getPostBySlug` in `lib/api.tsx`, an
 ...
 export const getPostBySlug = (slug: string) => {
   const fileContents = readFile(`${slug}.mdx`);
-  const { data: metaData, content } = matter(fileContents);
-  return { metaData, content, slug };
+  const { data: metadata, content } = matter(fileContents);
+  return { metadata, content, slug };
 };
 ...
 ```
@@ -276,7 +276,7 @@ There is a method called `serialize` in `next-mdx-remote`, it parse and compile 
 npm install -D next-mdx-remote
 ```
 
-The next steo is call `getPostBySlug` fetching post content and metaData in `getStaticProps`, and use them as props.
+The next steo is call `getPostBySlug` fetching post content and metadata in `getStaticProps`, and use them as props.
 
 ```javascript
 // [slug].tsx
@@ -284,12 +284,12 @@ import { getPostBySlug } from '../../lib/api';
 import matter from 'gray-matter'
 
 export const getStaticProps = async ({ params: { slug } }: Params) => {
-  const { metaData, content } = getPostBySlug(slug);
+  const { metadata, content } = getPostBySlug(slug);
   const { mdxSource } = await serialize(content);
 
   return {
     props: {
-      metaData,
+      metadata,
       mdxSource,
     },
   };
@@ -313,7 +313,7 @@ const Post = ({ mdxSource, prevPost, nextPost }: Props) => (
 export default Post;
 ```
 
-There is a basic content showing in the page. Because we also get the metaData, 
+There is a basic content showing in the page. Because we also get the metadata, 
 we could use `thumbnailUrl` as our post banner or showing any information like tags.
 Now, we have a basic blog, we can show all the posts and click link to any post page.
 
